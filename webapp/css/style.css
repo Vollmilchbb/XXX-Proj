@@ -1,0 +1,36 @@
+/* Enter your custom styles here */
+.sabPrufAntragsDatenLabel{
+	font-size:1.1rem !important;
+	color: black;
+}
+
+.iconSizeMedium {
+	font-size: 1.5rem;
+}
+
+@media (max-width:599px) {
+	.iconSizeMedium {
+		font-size : 1.0rem;
+	}
+}
+
+.sapMTreeItemBase {
+    font-size: 1.1rem;
+}
+
+.myErrorRed  {
+	background-color: #bb0000 !important;
+}
+
+.redColor {
+	color: #bb0000 !important;
+}
+
+.greenColor .sapMSLIImgIcon {
+	color: #2B7D2B;
+}
+
+.greenColor {
+    color: #2B7D2B;
+}
+

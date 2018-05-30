@@ -1,0 +1,17 @@
+{
+  "AntragsStatus": {
+    "type": "String",
+    "value": "Offen",
+    "valueInfo": {}
+  },
+  "DatumAntragserfassung": {
+    "type": "String",
+    "value": "08.05.2018",
+    "valueInfo": {}
+  },
+  "ProduktName": {
+    "type": "String",
+    "value": "ProduktnameXY",
+    "valueInfo": {}
+  }
+}

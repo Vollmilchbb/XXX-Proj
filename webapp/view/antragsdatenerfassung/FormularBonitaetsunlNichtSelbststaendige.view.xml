@@ -1,0 +1,462 @@
+<mvc:View controllerName="de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.FormularBonitaetsunlNichtSelbststaendige"
+          xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+          xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+          displayBlock="true">
+
+    <semantic:FullscreenPage id="page"
+                             semanticRuleSet="Optimized" navButtonPress="onNavBack" showNavButton="true"
+                             title="{i18n>antragsDatenPruefTitle}">
+        <semantic:content>
+            <VBox class="sapUiLargeMarginEnd">
+                <f:Form id="dataForm" editable="true">
+                    <f:title>
+                        <core:Title text="{i18n>antragsDatenAllgemein}" />
+                    </f:title>
+                    <f:layout>
+                        <f:ResponsiveGridLayout labelSpanXL="3"
+                                                labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+                                                emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                                                columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+                    </f:layout>
+                    <f:formContainers>
+                        <f:FormContainer title="{i18n>processID}">
+                            <f:formElements>
+                                <f:FormElement label="Process-ID">
+                                    <f:fields>
+                                        <Input id="processID" tooltip="Process-ID"
+                                               valueStateText="Das Feld muss gesetzt sein."
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer title="{i18n>antragsDaten}">
+                            <f:formElements>
+                                <f:FormElement label="Antragsteller angestellt">
+                                    <f:fields>
+                                        <CheckBox id="chkbxAntrStlrAngstlt"
+                                                  valueStateText="Das Feld 'Antragsteller' muss gesetzt sein."
+                                                  tooltip="Das Datenfeld gibt an, ob der Kunde die Auswahl 'ich bin angestellt' getroffen hat."
+                                                  selected="{
+											path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_BerufArbeitgeber_Angestellt/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Antragsteller 2 angestellt">
+                                    <f:fields>
+                                        <CheckBox id="chkbxAntrStlr2Angstlt"
+                                                  tooltip="Das Datenfeld gibt an, ob der Kunde die Auswahl 'ich bin angestellt' getroffen hat."
+                                                  valueStateText="Das Feld 'Antragsteller2' muss gesetzt sein."
+                                                  selected="{
+											path : 'antragsData>/Antrag_AllgAngaben_Antragsteller2_BerufArbeitgeber_Angestellt/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>formNatPerson}">
+                                    <f:fields>
+                                        <CheckBox id="chkbxNatPerson"
+                                                  tooltip="Gibt an, ob es sich um eine natürliche Persone handelt. True =Ja False = Juristische Person"
+                                                  valueStateText="Das Feld 'Natürliche Person' muss gesetzt sein."
+                                                  selected="{
+											path : 'antragsData>/Antrag_natuerliche_Person/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Anzahl der Kinder">
+                                    <f:fields>
+                                        <Input id="inputAnzKinder" tooltip="Anzahl der Kinder wird in diesem Feld gespeichert"
+                                               valueStateText="Das Feld 'Anzahl der Kinder' muss gesetzt sein."
+                                               value="{antragsData>/Antrag_Selbstauskunft_Antragsteller_AnzahlKinderKindergeld/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Kindergeldnachweis vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxKindergeldNachweis"
+                                                  valueStateText="Das Feld 'Kindergeldnachweis' muss gesetzt sein."
+                                                  tooltip="Gibt an, ob das/bzw. ein Dokument zum Kindergednachweis vorhanden ist"
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Kindergeldnachweis/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Vordrucknummer Antrag">
+                                    <f:fields>
+                                        <Input id="inputVordrucknummerAntrag"
+                                               tooltip="Vordrucknummer (Antrag Wohnungsbau selbstgenutztes Wohneigentum) mit der Vordrucknummer ist ein Ordnungsmerkmal, welches für bestimmte Anträge vergeben wird"
+                                               valueStateText="Das Feld 'Vordrucknummer Antrag' muss gesetzt sein."
+                                               value="{antragsData>/Antrag_Vordrucknummer/value}" width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Antrag vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxAntragVorhanden" tooltip="Gibt an, ob der Antrag vorhanden ist"
+                                                  valueStateText="Antrag vorhanden darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Antrag/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>formBauplanVorh}">
+                                    <f:fields>
+                                        <CheckBox id="chkbxBauplaeneVorhanden"
+                                                  tooltip="Es wird überprüft, ob das Dokument, die Dokumente über die Baupläne vorhanden sind"
+                                                  valueStateText="Antrag vorhanden darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Bauplaene/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Eigenmittelnachweis vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxEigenmittelnachweis"
+                                                  tooltip="Das Datenfeld gibt an, ob ein Dokument zur Bestätigung der Eigenmittel vorhanden ist"
+                                                  valueStateText="Eigenmittelnachweis darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Eigenmittelnachweis/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Einkommensnachweis vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxEinkommensnachweis"
+                                                  tooltip="Es wird überprüft, ob Einkommensnachweise vorhanden sind. Diese dürfen nicht älter als 6 Monate sein."
+                                                  valueStateText="Eigenmittelnachweis darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Grundbuch vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxGrundbuchVorhanden"
+                                                  tooltip="Das Grundbuch des zu fördernden Objektes muss vorhanden sein, um den FED vollständig bewerten zu können"
+                                                  valueStateText="Grundbuch darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Grundbuch/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>formEinkunfteAngestellten}">
+                                    <f:fields>
+                                        <Input id="inputASAEArbeit"
+                                               tooltip="Es werden Einkünfte aus nicht selbständiger Arbeit (Angestelltenverhältnis) eingetragen"
+                                               valueStateText="Das Feld 'Einkünfte aus Angestelltenverhältnis' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Selbstauskunft_Antragsteller_EinnahmenausnselbstArbeit/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>formIdentitatFest}">
+                                    <f:fields>
+                                        <CheckBox id="chkbxIdentitaetsfeststellung"
+                                                  tooltip="Mittels einer Ausweiskopie wird die Identität des Antragstellers festgestellt. Dieser darf bei der Antragstellung nicht abgelaufen sein."
+                                                  valueStateText="Identitätsfeststellung darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Identitaetsfeststellung/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Summe Gesamtfinanzierung">
+                                    <f:fields>
+                                        <Input id="inputSummeGesamtfin" tooltip="Summe aller Finanzierungsbausteine"
+                                               valueStateText="Summe Gesamtfinanzierung darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_SummeGesamtfinanzierung/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Baukosten Gebäude">
+                                    <f:fields>
+                                        <Input id="inputBaukostenGebauede"
+                                               tooltip="Gibt die Baukosten des Gebäudes nach DIN276 an"
+                                               valueStateText="Das Feld 'Baukosten Gebäude' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Kosten_BaukostenGebaeude/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Gesamtkosten lt. Kofi">
+                                    <f:fields>
+                                        <Input id="inputGesamtkostenKofi"
+                                               tooltip="Gibt die Summe aller Kosten für das Vorhaben an"
+                                               valueStateText="Das Feld 'Gesamtkosten lt. Kofi' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Kosten_SummeKosten/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="{i18n>formFEDarl}">
+                                    <f:fields>
+                                        <Input id="inputFoerderergaenzungsdarlehenEURO"
+                                               tooltip="Gibt die vom Antragsteller gewünschte Höhe für ein Förderergänzungsdarlehen an"
+                                               valueStateText="Das Feld 'Förderergänzungsdarlehen' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Gesamtlaufzeit Förderergänzungsdarlehen">
+                                    <f:fields>
+                                        <Input id="inputGesamtlaufzeitFoerderergaenzungsdarlehen"
+                                               valueStateText="Das Feld 'Gesamtlaufzeit Förderergänzungsdarlehen' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Tilgung in % p. a.">
+                                    <f:fields>
+                                        <Input id="inputTilgung" valueStateText="Das Feld 'Tilgung' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Anzahl Tilgungsfreijahre">
+                                    <f:fields>
+                                        <Input id="inputAnzTilgungsfreiejahre"
+                                               valueStateText="Das Feld 'Tilgungsfreiejahre' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Zinsbindung">
+                                    <f:fields>
+                                        <Input id="inputZinsbindung" valueStateText="Das Feld 'Zinsbindung' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="mtl. Belastung aus Darlehen in €">
+                                    <f:fields>
+                                        <Input id="inputMtlBelastungAusDarlehen"
+                                               valueStateText="Das Feld 'mtl. Belastung aus Darlehen' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Selbstauskunft_Verbindlichkeiten_Belastung/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="sonstiges Eigenkapital">
+                                    <f:fields>
+                                        <Input id="inputSonstigesEigenkapital"
+                                               valueStateText="Das Feld 'sonstiges Eigenkapital' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Eigenkapital_SonstigesEigenkapital/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Vermögen vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxVermoegenVorhanden"
+                                                  valueStateText="Identitätsfeststellung darf nicht leer sein."
+                                                  selected="{
+											path : 'antragsData>/Antrag_Selbstauskunft_Antragsteller_Vermogeneintragen/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                        label="Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag1">
+                                    <f:fields>
+                                        <Input id="inputAntrag_Selbstauskunft_Vermogen_1"
+                                               valueStateText="Das Feld 'Antrag_Selbstauskunft_Vermogen_1' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag1/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                        label="Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag12">
+                                    <f:fields>
+                                        <Input id="inputAntrag_Selbstauskunft_Vermogen_2"
+                                               valueStateText="Das Feld 'Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag12' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag12/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                        label="Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag2">
+                                    <f:fields>
+                                        <Input
+                                                id="inputAntrag_Selbstauskunft_Vermogen_BetragVermogenAntrag2"
+                                                valueStateText="Das Feld 'Antrag_Selbstauskunft_Vermogen_2' darf nicht leer sein."
+                                                value="{antragsData>/Antrag_Selbstauskunft_Vermogen_BetragVermogenAntrag2/value}"
+                                                width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Einwilligung Datenschutz">
+                                    <f:fields>
+                                        <CheckBox id="chkbxEinwilligungDatenschutz"
+                                                  valueStateText="Das Feld 'Einwilligung Datenschutz' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Antrag_Einwilligung_Datenschutz/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Einwilligung Bankauskünfte">
+                                    <f:fields>
+                                        <CheckBox id="chkbxEinwilligungBankauskuenfte"
+                                                  valueStateText="Das Feld 'Einwilligung Bankauskünfte' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Antrag_Erklaerung_Einholung_bankmaessiger_Auskuenfte/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Summe Gesamtfinanzierung">
+                                    <f:fields>
+                                        <Input id="inputSumGesamtfinanzierung"
+                                               valueStateText="Das Feld 'Summe Gesamtfinanzierung' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Gesamtfinanzierung/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Zahlnachweis Kindergeld">
+                                    <f:fields>
+                                        <Input id="inputZahlnachweisKindergeld"
+                                               valueStateText="Das Feld 'Zahlnachweis Kindergeld' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_KoFi_Gesamtkosten/value}" width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Zahlnachweis Kindergeld">
+                                    <f:fields>
+                                        <CheckBox id="chkbxZahlnachweisKindergeld"
+                                                  valueStateText="Das Feld 'Einwilligung Bankauskünfte' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Summe Alter der Kinder">
+                                    <f:fields>
+                                        <Input id="inputSumAlterKinder"
+                                               valueStateText="Das Feld 'Summe Alter der Kinder' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Summe_Alter_der_Kinder/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="sonstiges Eigenkapital">
+                                    <f:fields>
+                                        <Input id="inputSonstEigenkapital"
+                                               valueStateText="Das Feld 'sonstiges Eigenkapital' darf nicht leer sein."
+                                               value="{antragsData>/Antrag_Summe_Sonsitges_Eigenkapital/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Bestätigung Einhaltung GWG">
+                                    <f:fields>
+                                        <CheckBox id="chkbxEinhaltungGWG"
+                                                  valueStateText="Das Feld 'Bestätigung Einhaltung GWG' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Antrag_Umsetzung_Geldwaeschegesetz/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Antrag vollständig, richtig und unterschrieben?">
+                                    <f:fields>
+                                        <CheckBox id="chkbxAntragVollstRichtigUntrschrbn"
+                                                  valueStateText="Das Feld 'Antrag vollständig, richtig und unterschrieben?' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Antrag_Vollstaendigkeit_und_Richtigkeit/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Anzahl der kindergeldberechtigten Kinder">
+                                    <f:fields>
+                                        <Input id="inputKGKinder"
+                                               valueStateText="Das Feld 'Anzahl der kindergeldberechtigten Kinder' darf nicht leer sein."
+                                               value="{antragsData>/Anzahl_Kinder_von_Kindergeldbescheid/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement
+                                        label="Kindergeldbescheid / Kindergeldfestsetzung vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxKindergeldBescheid"
+                                                  valueStateText="Das Feld 'Kindergeldbescheid / Kindergeldfestsetzung vorhanden' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Nachweis_ueber_Kindergeld/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Wohnflächenberechnung vorhanden">
+                                    <f:fields>
+                                        <CheckBox id="chkbxWohnflaechenberechnung"
+                                                  valueStateText="Das Feld 'Wohnflächenberechnung vorhanden' darf nicht leer sein"
+                                                  selected="{
+											path : 'antragsData>/Dokument_Typ_Wohnflaechenberechnung/value',
+											type : 'sap.ui.model.type.Boolean',
+											formatter: '.formatBoolean'
+											}"
+                                                  text="vorhanden" value="{}" />
+                                    </f:fields>
+                                </f:FormElement>
+                                <f:FormElement label="Baukosten Gebäude ">
+                                    <f:fields>
+                                        <Input id="inputKstBaukostenGebauede"
+                                               valueStateText="Das Feld 'Baukosten Gebäude ' darf nicht leer sein."
+                                               value="{antragsData>/Kostenaufstellung_Baukosten_Gebaeude_nach_DIN/value}"
+                                               width="15em" />
+                                    </f:fields>
+                                </f:FormElement>
+                            </f:formElements>
+                        </f:FormContainer>
+                    </f:formContainers>
+                </f:Form>
+            </VBox>
+        </semantic:content>
+
+        <semantic:customFooterContent>
+            <Button type="Accept" text="{i18n>saveAndQuit}" class="sapUiTinyMarginEnd" press="onValidateBtnPress">
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                </layoutData>
+            </Button>
+            <Button type="Reject" text="{i18n>reject}" press="onHandleReject" class="sapUiSmallMarginEnd">
+                <layoutData>
+                    <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                </layoutData>
+            </Button>
+        </semantic:customFooterContent>
+    </semantic:FullscreenPage>
+</mvc:View>

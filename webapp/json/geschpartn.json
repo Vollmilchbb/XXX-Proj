@@ -1,0 +1,17 @@
+{
+	  "GeschaeftspartnerNr": {
+	    "type": "String",
+	    "value": "2002102718",
+	    "valueInfo": {}
+	  },
+	  "Telefonnummer": {
+	    "type": "String",
+	    "value": "+4935955779750",
+	    "valueInfo": {}
+	  },
+	  "NameVorname": {
+	    "type": "String",
+	    "value": "Daniela Hirschberg",
+	    "valueInfo": {}
+	  }
+}

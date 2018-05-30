@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core">
+    <Popover
+        title="Aenderungen Verwerfen?"
+        class="sapUiContentPadding"
+        placement="Top"
+            initialFocus="OKid">
+            <Toolbar>
+                <Button
+                        id="OKid"
+                        text="Bestaetigen"
+                        press="handlePopoverOK"
+                        type="accept"
+                />
+                <Button
+                        id="Cancelid"
+                        text="Abbrechen"
+                        press="handlePopoverCancel"
+                        type="reject"
+                />
+                <ToolbarSpacer/>
+            </Toolbar>
+    </Popover>
+</core:FragmentDefinition>

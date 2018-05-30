@@ -1,0 +1,206 @@
+[
+  {
+    "text": "Standardunterlagen",
+    "ref": "sap-icon://pdf-attachment",
+    "nodes":
+    [
+      {
+        "text": "Dokument_Typ_Antrag",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Eigenmittelnachweis",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Grundbuch",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Wohnflaechenberechnung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Bauplaene",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Identitaetsfeststellung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Selbstauskunft",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre",
+        "ref": "sap-icon://document-text"
+      }
+    ]
+  },
+  {
+    "text": "AllgemeineBonitaetsunterlagen",
+    "ref": "sap-icon://pdf-attachment",
+    "nodes":
+    [
+      {
+        "text": "Dokument_Typ_Antrag",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Eigenmittelnachweis",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Grundbuch",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Wohnflaechenberechnung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Bauplaene",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Identitaetsfeststellung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Selbstauskunft",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate",
+        "ref": "sap-icon://document-text"
+      }
+    ]
+  },
+  {
+    "text": "BonitaetsunterlagenNichtselbststaendige",
+    "ref": "sap-icon://pdf-attachment",
+    "nodes": [
+      {
+        "text": "Dokument_Typ_Antrag",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Eigenmittelnachweis",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Grundbuch",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Wohnflaechenberechnung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Bauplaene",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Identitaetsfeststellung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Selbstauskunft",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate",
+        "ref": "sap-icon://document-text"
+      }
+    ]
+  },
+  {
+    "text": "BonitaetsunterlagenKindernachweis",
+    "ref": "sap-icon://pdf-attachment",
+    "nodes": [
+      {
+        "text": "Dokument_Typ_Antrag",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Eigenmittelnachweis",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Grundbuch",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Wohnflaechenberechnung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Bauplaene",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Identitaetsfeststellung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Selbstauskunft",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Jahresabschluss",
+        "ref": "sap-icon://document-text"
+      }
+    ]
+  },
+  {
+    "text": "PlausibilitaetBonitaetsunterlagen",
+    "ref": "sap-icon://pdf-attachment",
+    "nodes": [
+      {
+        "text": "Dokument_Typ_Antrag",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Eigenmittelnachweis",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Grundbuch",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Wohnflaechenberechnung",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Bauplaene",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken",
+        "ref": "sap-icon://document-text"
+      },
+      {
+        "text": "Dokument_Typ_Jahresabschluss",
+        "ref": "sap-icon://document-text"
+      }
+    ]
+  }
+]

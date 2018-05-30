@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="infoGeschaeftspartnerFrmID"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="{i18n>infomodelGeschVorfall}"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="12"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="2"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="Produktname" />
+				<Text text="{modelGeschVorfall>/ProduktName/value}" />
+				<Label text="Datum Antragserfassung" />
+				<Text text="{modelGeschVorfall>/DatumAntragserfassung/value}" />
+				<Label text="Status des Antrages" />
+				<Text text="{modelGeschVorfall>/AntragsStatus/value}" />
+			<FlexBox
+				alignItems="End"
+				justifyContent="End">
+				<items>
+					<Button text="Dokuemente aufrufen" type="Emphasized" class="sapUiSmallMarginEnd" />
+					<Button text="Daten aufrufen" type="Emphasized" class="sapUiSmallMarginEnd" />
+				</items>
+			</FlexBox>
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>

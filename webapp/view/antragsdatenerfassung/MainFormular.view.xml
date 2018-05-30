@@ -1,0 +1,219 @@
+<mvc:View
+	controllerName="de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.MainFormular"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+	xmlns="sap.m"
+	displayBlock="true">
+	<Page id="formularDAP" title="{i18n>antrdaterfassung}"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+		<l:VerticalLayout id="containerLayout" width="100%" >
+			<l:BlockLayout id="BlockLayout" background="Dashboard"> <!--  Light, Accent, Default, Dashboard -->
+				<l:BlockLayoutRow>
+                    <l:BlockLayoutCell>
+						 <core:Fragment id="perfEval" fragmentName="de.sachsen.sab.antrdatpruf.view.fragmente.InfoGeschaeftspartner" type="XML"/>
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell>
+						<core:Fragment id="kundeEval" fragmentName="de.sachsen.sab.antrdatpruf.view.fragmente.InfoKunde" type="XML"/>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+				<l:BlockLayoutRow>
+						<l:BlockLayoutCell title="{i18n>prufAntragsdaten}">
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+										src="sap-icon://message-success"
+										class="iconSizeMedium sapUiTinyMarginTop"
+										color="#2B7D2B"
+										id="iconStandardUnterlageID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufStandardUnl}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="prufStandardUnt" text="Anzeigen" press="onPrufStandardUnterlagen" width="100%" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+											src="sap-icon://message-success"
+											class="iconSizeMedium sapUiTinyMarginTop"
+											color="#2B7D2B"
+											id="iconAllgBonUnterlagenID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufAllgBoniUnl}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="prufAllgBon" text="Anzeigen" width="100%" press="onPrufAllgBonUnterlagen" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+											src="sap-icon://message-success"
+											class="iconSizeMedium sapUiTinyMarginTop"
+											color="#2B7D2B"
+											id="iconBonUnlNichtSelbstStID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufBonNichtSelbst}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="prufBonUnlNichtSelbstst" text="Anzeigen" width="100%" press="onPrufBonUnlNichtSelbstst" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+										src="sap-icon://message-success"
+										class="iconSizeMedium sapUiTinyMarginTop"
+										color="#2B7D2B"
+										id="iconBonKindNachweisID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufBoniUnlKind}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="prufBonKinder" text="Anzeigen" width="100%" press="onPrufBonUnterlagenFurKinderNachweis">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+										src="sap-icon://message-success"
+										class="iconSizeMedium sapUiTinyMarginTop"
+										color="#2B7D2B"
+										id="iconBonPlausiID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufPlausiBoni}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="plausiBtnId" text="Anzeigen" width="100%" press="onPlausiBonitaetsUnterlagen" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+										src="sap-icon://message-success"
+										class="iconSizeMedium sapUiTinyMarginTop"
+										color="#2B7D2B"
+										id="iconAntraegeVorhID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufAntraegeVorh}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="antrVorhBtnId" text="Anzeigen" width="100%" press="onAntraegeVorhanden" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+							<HBox alignItems="Start">
+								<items>
+									<core:Icon
+										src="sap-icon://message-success"
+										class="iconSizeMedium sapUiTinyMarginTop"
+										color="#2B7D2B"
+										id="iconRichtigkeitAntrDatenID">
+										<core:layoutData>
+											<FlexItemData growFactor="0.4" />
+										</core:layoutData>
+									</core:Icon>
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufRichtigkeitAntragsdaten}" width="31em">
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Label>
+									<Button id="plausiBtnID" text="Anzeigen" width="100%" press="onRichtigkeitAntragsdaten" >
+										<layoutData>
+											<FlexItemData growFactor="1" />
+										</layoutData>
+									</Button>
+								</items>
+							</HBox>
+						</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell title="{i18n>prufDokumente}">
+						<Tree id="treeDocsId">
+						</Tree>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</l:VerticalLayout>
+		</content>
+		<footer>
+			<Toolbar
+					id="otbFooter">
+				<Button
+						icon="sap-icon://alert"
+						text="{= ${message>/}.length }"
+						visible="{= ${message>/}.length > 0 }"
+						type="Emphasized"
+						press="onMessagePopoverPress" />
+				<ToolbarSpacer/>
+				<Button type="Accept" text="{i18n>OKSachverhalt}" class="sapUiTinyMarginEnd" press="onSachverhaltGeklaert">
+				</Button>
+				<Button type="Ghost" text="{i18n>AbmeldenZS}" press="onAbmeldenZwischenspeichern" class="sapUiTinyMarginEnd">
+				</Button>
+                <Button type="Ghost" text="{i18n>AbmeldenOS}" press="onAbmeldenOhneSpeichern" class="sapUiTinyMarginEnd">
+                </Button>
+                <Button type="Reject" text="{i18n>SachverhaltNK}" press="onSachverhaltNichtKlaerbar" class="sapUiTinyMarginEnd">
+                </Button>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
