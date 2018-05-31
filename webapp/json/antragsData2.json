@@ -9,6 +9,11 @@
     "value": false,
     "valueInfo": {}
   },
+  "gepruefte_daten": {
+    "type": "Json",
+    "value": "[{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_AllgAngaben_Antragsteller_Geburtsdatum\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"}]",
+    "valueInfo": {}
+  },
   "bestehendes_ObligoTreuhanddarlehen": {
     "type": "Boolean",
     "value": false,
@@ -131,7 +136,7 @@
   },
   "Liste_nicht_vorhandener_Dokumente": {
     "type": "Object",
-    "value": [],
+    "value": "rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAA=",
     "valueInfo": {
       "objectTypeName": "[Ljava.lang.String;",
       "serializationDataFormat": "application/x-java-serialized-object"
@@ -354,10 +359,7 @@
   },
   "Antrag_Gesamtpruefung_Adresse": {
     "type": "Object",
-    "value": [
-      "True",
-      "False"
-    ],
+    "value": "rO0ABXNyABNqYXZhLnV0aWwuQXJyYXlMaXN0eIHSHZnHYZ0DAAFJAARzaXpleHAAAAACdwQAAAACdAAEVHJ1ZXQABUZhbHNleA==",
     "valueInfo": {
       "objectTypeName": "java.util.ArrayList",
       "serializationDataFormat": "application/x-java-serialized-object"
@@ -545,13 +547,7 @@
   },
   "Liste_Daten_pruefen": {
     "type": "Object",
-    "value": [
-      "Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate",
-      "Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre",
-      "Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag",
-      "Antrag_AllgAngaben_Antragsteller_Geburtsdatum",
-      "Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung"
-    ],
+    "value": "rO0ABXNyABFqYXZhLnV0aWwuSGFzaFNldLpEhZWWuLc0AwAAeHB3DAAAAAg/QAAAAAAABXQATEFudHJhZ19Lb0ZpX0ZyZW1kbWl0dGVsX0dydXBwZUZvcmRlcmVyZ2FuenVuZ3NkYXJsZWhlbl9HZXNhbXRsYXVmemVpdF9Nb25hdGV0AEhBbnRyYWdfS29GaV9GcmVtZG1pdHRlbF9HcnVwcGVGb3JkZXJlcmdhbnp1bmdzZGFybGVoZW5fVGlsZ3VuZ3NmcmVpamFocmV0AD1BbnRyYWdfS29GaV9GcmVtZG1pdHRlbF9HcnVwcGVGb3JkZXJlcmdhbnp1bmdzZGFybGVoZW5fQmV0cmFndAAtQW50cmFnX0FsbGdBbmdhYmVuX0FudHJhZ3N0ZWxsZXJfR2VidXJ0c2RhdHVtdAA+QW50cmFnX0tvRmlfRnJlbWRtaXR0ZWxfR3J1cHBlRm9yZGVyZXJnYW56dW5nc2RhcmxlaGVuX1RpbGd1bmd4",
     "valueInfo": {
       "objectTypeName": "java.util.HashSet",
       "serializationDataFormat": "application/x-java-serialized-object"

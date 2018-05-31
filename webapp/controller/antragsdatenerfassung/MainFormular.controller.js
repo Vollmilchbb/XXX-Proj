@@ -350,6 +350,7 @@ sap.ui.define([
                     console.log('an error occured: ' + error);
                 } else {
                     let taskJson = JSON.parse(response.text);
+                    console.log(taskJson);
                 }
             });
         },

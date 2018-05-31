@@ -37,7 +37,7 @@ sap.ui.define([
 
 
         /**
-         * called on destroy
+         * Destroy
          */
         onExit: function () {
             if (this._oPopover) {
