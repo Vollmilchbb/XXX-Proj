@@ -1,0 +1,132 @@
+<mvc:View controllerName="de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.Vorhabensdaten"
+          xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+          xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+          displayBlock="true">
+
+    <Page id="page"
+          navButtonPress="onNavBack" showNavButton="true"
+          title="{i18n>bonitaetsDatenTitle}" enableScrolling="true">
+        <content>
+            <l:VerticalLayout id="oVerticalContent" width="100%"></l:VerticalLayout>
+            <f:Form id="dataForm" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout labelSpanXL="3"
+                                            labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+                                            emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                                            columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer title="Vorhabensdaten">
+                        <f:formElements>
+                            <f:FormElement label="{i18n>Antrag_Vorhaben_Vorhabensbeschreibung}">
+                                <f:fields>
+                                    <Input id="Antrag_Vorhaben_Vorhabensbeschreibung"
+                                           tooltip="{i18n>ttAntrag_Vorhaben_Vorhabensbeschreibung}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Vorhaben_Vorhabensbeschreibung/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_Objekt_Gemarkung}">
+                                <f:fields>
+                                    <Input id="Antrag_Objekt_Gemarkung"
+                                           tooltip="{i18n>ttAntrag_Objekt_Gemarkung}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Objekt_Gemarkung/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_Objekt_Flur}">
+                                <f:fields>
+                                    <Input id="Antrag_Objekt_Flur"
+                                           tooltip="{i18n>ttAntrag_Objekt_Flur}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Objekt_Flur/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_Objekt_Antragwohnflallg}">
+                                <f:fields>
+                                    <Input id="Antrag_Objekt_Antragwohnflallg"
+                                           tooltip="{i18n>ttAntrag_Objekt_Antragwohnflallg}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Objekt_Antragwohnflallg/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+
+        <footer>
+            <Toolbar
+                    id="otbFooter">
+                <Button
+                        icon="sap-icon://alert"
+                        text="{= ${message>/}.length }"
+                        visible="{= ${message>/}.length > 0 }"
+                        type="Emphasized"
+                        press="onMessagePopoverPress"/>
+
+                <ToolbarSpacer/>
+                <Button type="Accept" text="{i18n>saveAndQuit}" class="sapUiTinyMarginEnd" press="onValidateBtnPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <Button type="Reject" text="{i18n>reject}" press="onHandleReject" class="sapUiSmallMarginEnd">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

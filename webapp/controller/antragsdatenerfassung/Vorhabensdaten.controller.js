@@ -3,7 +3,7 @@ sap.ui.define([
     ], function (BaseFormularController) {
 
 
-        return BaseFormularController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.FormularBonitaetsunlNichtSelbststaendige", {
+        return BaseFormularController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.Vorhabensdaten", {
             onInit: function() {
                 this.getRouter().attachRouteMatched(this.handleRouteMatched, this);
                 this.initErrMsgPopover(this.getView());

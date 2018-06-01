@@ -102,9 +102,9 @@
 			  "name": "richtigkeitAntragsdaten",
 			  "target": "richtigkeitAntragsdaten"
 			}, {
-              "pattern": "antragsdaten/BonitaetsunterlagenNichtselbststaendige",
-              "name": "bonUnlNichtSelbstst",
-              "target": "bonUnlNichtSelbstst"
+              "pattern": "antragsdaten/Vorhabensdaten",
+              "name": "vorhabensdaten",
+              "target": "vorhabensdaten"
             }, {
 			  "pattern": "antragsdaten/SachverhaltNichtKlaerbar",
 			  "name": "sachverhaltNichtKlaerbar",
@@ -169,10 +169,10 @@
 				  "viewLevel": 3,
 				  "transition": "flip"
 				},
-                "bonUnlNichtSelbstst" : {
-                  "viewId": "bonUnlNichtSelbstst",
+                "vorhabensdaten" : {
+                  "viewId": "vorhabensdaten",
                   "viewPath": "de.sachsen.sab.antrdatpruf.view.antragsdatenerfassung",
-                  "viewName": "FormularBonitaetsunlNichtSelbststaendige",
+                  "viewName": "Vorhabensdaten",
                   "viewLevel": 3,
                   "transition": "flip"
                 },

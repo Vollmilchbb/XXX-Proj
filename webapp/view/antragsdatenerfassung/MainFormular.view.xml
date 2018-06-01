@@ -80,7 +80,7 @@
 											<FlexItemData growFactor="0.4" />
 										</core:layoutData>
 									</core:Icon>
-									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>prufBonNichtSelbst}" width="31em">
+									<Label class="sapUiTinyMarginBottom sapUiTinyMarginTop sapUiSmallMarginBegin sabPrufAntragsDatenLabel" text="{i18n>vorhabensdaten}" width="31em">
 										<layoutData>
 											<FlexItemData growFactor="1" />
 										</layoutData>

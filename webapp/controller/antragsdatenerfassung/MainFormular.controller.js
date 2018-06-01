@@ -142,7 +142,7 @@ sap.ui.define([
          * BonitaetsUnterlagen Nicht Selbststaendig
          */
         onPrufBonUnlNichtSelbstst: function () {
-            this.getRouter().navTo("bonUnlNichtSelbstst")
+            this.getRouter().navTo("vorhabensdaten")
         },
 
         /**
