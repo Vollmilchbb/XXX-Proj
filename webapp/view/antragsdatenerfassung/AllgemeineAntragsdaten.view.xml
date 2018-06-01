@@ -1,0 +1,279 @@
+<mvc:View controllerName="de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.AllgemeineAntragsdaten"
+          xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+          xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+          displayBlock="true">
+
+    <Page id="page"
+          navButtonPress="onNavBack" showNavButton="true"
+          title="{i18n>antragsDatenPruefTitle}" enableScrolling="true">
+        <content>
+            <l:VerticalLayout id="oVerticalContent" width="100%"></l:VerticalLayout>
+            <f:Form id="dataForm" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout labelSpanXL="3"
+                                            labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+                                            emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                                            columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer title="{i18n>antragsDaten}">
+                        <f:formElements>
+                            <f:FormElement label="{i18n>VordrucknummerAntrag}">
+                                <f:fields>
+                                    <Input id="Antrag_Vordrucknummer"
+                                           tooltip="{i18n>ttVordrucknummerAntrag}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Vordrucknummer/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_natuerliche_Person}">
+                                <f:fields>
+                                    <CheckBox id="Antrag_natuerliche_Person"
+                                              tooltip="{i18n>ttAntrag_natuerliche_Person}"
+                                              selected="{
+												path : 'antragsData>/Antrag_natuerliche_Person/value',
+												type : 'sap.ui.model.type.Boolean'
+												}"
+                                              text="vorhanden" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_Antragsnummer}">
+                                <f:fields>
+                                    <Input id="Antrag_Antragsnummer"
+                                           tooltip="{i18n>ttAntrag_Antragsnummer}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_Antragsnummer/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Bestand_Kundennummer}">
+                                <f:fields>
+                                    <Input id="Bestand_Kundennummer"
+                                           tooltip="{i18n>ttBestand_Kundennummer}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Bestand_Kundennummer/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 25
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                    <f:FormContainer title="Antragsteller">
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_Anrede}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_Anrede"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_Anrede}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_Anrede/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_Name}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_Name"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_Name}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_Name/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_Geburtsdatum}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_Geburtsdatum"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_Geburtsdatum}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_Geburtsdatum/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_Strasse}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_Strasse"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_Strasse}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_Strasse/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_PLZ}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_PLZ"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_PLZ}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_PLZ/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 8
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_AllgAngaben_Antragsteller_Ort}">
+                            <f:fields>
+                                <Input id="Antrag_AllgAngaben_Antragsteller_Ort"
+                                       tooltip="{i18n>ttAntrag_AllgAngaben_Antragsteller_Ort}"
+                                       valueStateText="Error state"
+                                       width="15em"
+                                       value="{
+													path : 'antragsData>/Antrag_AllgAngaben_Antragsteller_Ort/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+                    <f:FormContainer title="Antragsdaten 2?">
+                        <f:FormElement label="{i18n>Antrag_Umsetzung_Geldwaeschegesetz}">
+                            <f:fields>
+                                <CheckBox id="Antrag_Umsetzung_Geldwaeschegesetz"
+                                          tooltip="{i18n>ttAntrag_Umsetzung_Geldwaeschegesetz}"
+                                          selected="{
+												path : 'antragsData>/Antrag_Umsetzung_Geldwaeschegesetz/value',
+												type : 'sap.ui.model.type.Boolean'
+												}"
+                                          text="vorhanden" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_Erklaerung_Einholung_bankmaessiger_Auskuenfte}">
+                            <f:fields>
+                                <CheckBox id="Antrag_Erklaerung_Einholung_bankmaessiger_Auskuenfte"
+                                          tooltip="{i18n>ttAntrag_Erklaerung_Einholung_bankmaessiger_Auskuenfte}"
+                                          selected="{
+												path : 'antragsData>/Antrag_Erklaerung_Einholung_bankmaessiger_Auskuenfte/value',
+												type : 'sap.ui.model.type.Boolean'
+												}"
+                                          text="vorhanden" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>Antrag_Vollstaendigkeit_und_Richtigkeit}">
+                            <f:fields>
+                                <CheckBox id="Antrag_Vollstaendigkeit_und_Richtigkeit"
+                                          tooltip="{i18n>ttAntrag_Vollstaendigkeit_und_Richtigkeit}"
+                                          selected="{
+												path : 'antragsData>/Antrag_Vollstaendigkeit_und_Richtigkeit/value',
+												type : 'sap.ui.model.type.Boolean'
+												}"
+                                          text="vorhanden" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+
+        <footer>
+            <Toolbar
+                    id="otbFooter">
+                <Button
+                        icon="sap-icon://alert"
+                        text="{= ${message>/}.length }"
+                        visible="{= ${message>/}.length > 0 }"
+                        type="Emphasized"
+                        press="onMessagePopoverPress"/>
+
+                <ToolbarSpacer/>
+                <Button type="Accept" text="{i18n>saveAndQuit}" class="sapUiTinyMarginEnd" press="onValidateBtnPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <Button type="Reject" text="{i18n>reject}" press="onHandleReject" class="sapUiSmallMarginEnd">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

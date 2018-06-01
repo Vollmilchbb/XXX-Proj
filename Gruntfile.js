@@ -87,7 +87,7 @@ module.exports = function(grunt) {
     	        },
     	        auth: {
     	        	user: sUser,
-    	        	pwd: sPwd
+    	        	pwd: sPwd,
     	        }
     		},
 	        upload_build: {

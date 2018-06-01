@@ -82,7 +82,7 @@
 				"name": "standardunterlagen",
 				"target": "standardunterlagen"
 			}, {
-				"pattern": "antragsdaten/AllgemeineBonitaetsunterlagen",
+				"pattern": "antragsdaten/Bonietaetsdaten",
 				"name": "allgBonitaetsunterlagen",
 				"target": "allgBonitaetsunterlagen"
 			}, {
@@ -130,14 +130,14 @@
 	            "standardunterlagen" : {
 	            	"viewId": "standardunterlagen",
 	            	"viewPath": "de.sachsen.sab.antrdatpruf.view.antragsdatenerfassung",
-	            	"viewName": "FormularStandardUnterlagen",
+	            	"viewName": "AllgemeineAntragsdaten",
 	            	"viewLevel": 3,
 	            	"transition": "flip"
 	            },
 				"allgBonitaetsunterlagen" : {
 					"viewId": "allgBonitaetsunterlagen",
 					"viewPath": "de.sachsen.sab.antrdatpruf.view.antragsdatenerfassung",
-					"viewName": "FormularAllgemeineBonitaetsUnterlagen",
+					"viewName": "Bonitaetsdaten",
 					"viewLevel": 3,
 					"transition": "flip"
 				},
