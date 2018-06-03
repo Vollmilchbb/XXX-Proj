@@ -11,7 +11,7 @@
   },
   "gepruefte_daten": {
     "type": "Json",
-    "value": "[{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_AllgAngaben_Antragsteller_Geburtsdatum\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"}]",
+    "value": "[{\"variable\":\"Antrag_Antragsnummer\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_AllgAngaben_Antragsteller_Geburtsdatum\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"},{\"variable\":\"Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre\",\"error_text\":\"Die Gesamtlaufzeit ist für die Person zu lang oder ist falsch angegeben.\"}]",
     "valueInfo": {}
   },
   "bestehendes_ObligoTreuhanddarlehen": {
@@ -136,7 +136,13 @@
   },
   "Liste_nicht_vorhandener_Dokumente": {
     "type": "Object",
-    "value": "rO0ABXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAAA=",
+    "value": [
+      "Selbstauskunft",
+      "detaillierte_Kostenaufstellung_nach_Gewerken",
+      "Nachweis_ueber_Kindergeld",
+      "Einnahmenüberschussrechnung",
+      "Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre"
+    ],
     "valueInfo": {
       "objectTypeName": "[Ljava.lang.String;",
       "serializationDataFormat": "application/x-java-serialized-object"

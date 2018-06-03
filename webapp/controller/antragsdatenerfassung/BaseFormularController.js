@@ -6,6 +6,7 @@ sap.ui.define([
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/Validator",
     "sap/m/MessageStrip"
+
 ], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.BaseFormularController", {

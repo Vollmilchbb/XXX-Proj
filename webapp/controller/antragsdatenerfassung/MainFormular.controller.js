@@ -30,7 +30,7 @@ sap.ui.define([
 
             //debug zeug
             let oModeljson = new sap.ui.model.json.JSONModel();
-            oModeljson.loadData("json/antragsData.json", "", false);
+            oModeljson.loadData("json/antragsData2.json", "", false);
 
             this.getView().setModel(oModeljson, "antragsData");
             sap.ui.getCore().setModel(oModeljson, "antragsData");
@@ -224,14 +224,15 @@ sap.ui.define([
                 aProp;
             try {
                 let oAntragsData = sap.ui.getCore().getModel("antragsData");
-                aProp = oAntragsData.getProperty("/Liste_nicht_vorhandener_Dokumente").value;
+                aProp = oAntragsData.getProperty("/gepruefte_daten").value;
             } catch (e) {
                 jQuery.sap.log.info('Keine Errorcodes vorhanden,' + e);
             }
-            if (aProp !== undefined && Array.isArray(aProp) && aProp.length > 0) {
+            if (aProp) {
                 //set icons on invalid data
                 try {
-                    FehlendeDocsUtil.getInstance(view).setErrorIconsOnPage(aProp, view);
+                    //TODO hier sollten die fehlenden Datenpruefungen ausgewertet werden, errorcode sollte liefern
+                    //in welchen einzelnen Pruefungen ein Fehler stattfand
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }
@@ -252,6 +253,7 @@ sap.ui.define([
             } catch (e) {
                 jQuery.sap.log.info("Keine Errorcodes fuer Dokumente vorhanden." + e);
             }
+            //todo hier eingeben welche errprüfungen falsch sind
             this._initTreeMissingDocsItems(aProp);
             if (aProp !== 'undefined' && Array.isArray(aProp) && !(aProp.length > 0)) {
                 sap.ui.getCore().getMessageManager().addMessages(new Message({
