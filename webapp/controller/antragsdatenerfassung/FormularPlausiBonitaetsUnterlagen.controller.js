@@ -7,6 +7,7 @@ sap.ui.define([
             onInit: function() {
                 this.getRouter().attachRouteMatched(this.handleRouteMatched, this);
                 this.initErrMsgPopover(this.getView());
+                this._setErrorInputs(this.getView());
             }
         });
     }

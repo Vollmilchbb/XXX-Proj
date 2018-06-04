@@ -3,10 +3,11 @@ sap.ui.define([
     ], function (BaseFormularController) {
 
 
-        return BaseFormularController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.Bonitaetsdaten", {
+        return BaseFormularController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.KostenFinanzierungsdaten", {
             onInit: function() {
                 this.getRouter().attachRouteMatched(this.handleRouteMatched, this);
                 this.initErrMsgPopover(this.getView());
+                this._setErrorInputs(this.getView());
             }
         });
     }

@@ -1,13 +1,14 @@
 sap.ui.define([
     "de/sachsen/sab/antrdatpruf/controller/BaseController",
     "sap/ui/model/json/JSONModel",
-    "de/sachsen/sab/antrdatpruf/camunda/rest-api-bundle",
+    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "sap/m/MessageBox",
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/Validator",
-    "sap/m/MessageStrip"
+    "sap/m/MessageStrip",
+    "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil"
 
-], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip) {
+], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip, FehlendeDocsUtil) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.BaseFormularController", {
 
@@ -233,6 +234,24 @@ sap.ui.define([
             let oMs = sap.ui.getCore().byId("msgStrip");
             if (oMs) {
                 oMs.destroy();
+            }
+        },
+
+        _setErrorInputs: function (oView) {
+            let aProp;
+            try {
+                let oAntragsData = sap.ui.getCore().getModel("antragsData");
+                aProp = oAntragsData.getProperty("/gepruefte_daten").value;
+            } catch (e) {
+                jQuery.sap.log.info('Keine Errorcodes vorhanden,' + e);
+            }
+            if (aProp) {
+                //set icons on invalid data
+                try {
+                    FehlendeDocsUtil.getInstance(oView).setErrorIconsOnPage(aProp, oView);
+                } catch (ex) {
+                    jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
+                }
             }
         }
 

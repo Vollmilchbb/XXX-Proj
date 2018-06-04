@@ -1,0 +1,302 @@
+<mvc:View controllerName="de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.KostenFinanzierungsdaten"
+          xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+          xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+          displayBlock="true">
+
+    <Page id="page"
+          navButtonPress="onNavBack" showNavButton="true"
+          title="{i18n>bonitaetsDatenTitle}" enableScrolling="true">
+        <content>
+            <l:VerticalLayout id="oVerticalContent" width="100%"></l:VerticalLayout>
+            <f:Form id="dataForm" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout labelSpanXL="3"
+                                            labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+                                            emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+                                            columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer title="Kosten &amp; Finanzierungsdaten">
+                        <f:formElements>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Kosten_BaukostenGebaeude}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Kosten_BaukostenGebaeude"
+                                           tooltip="{i18n>ttAntrag_KoFi_Kosten_BaukostenGebaeude}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Kosten_BaukostenGebaeude/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Kosten_SummeKosten}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Kosten_SummeKosten"
+                                           tooltip="{i18n>ttAntrag_KoFi_Kosten_SummeKosten}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Kosten_SummeKosten/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Gesamtkosten}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Gesamtkosten"
+                                           tooltip="{i18n>ttAntrag_KoFi_Gesamtkosten}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Gesamtkosten/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Eigenkapital_SonstigesEigenkapital}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Eigenkapital_SonstigesEigenkapital"
+                                           tooltip="{i18n>ttAntrag_KoFi_Eigenkapital_SonstigesEigenkapital}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Eigenkapital_SonstigesEigenkapital/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_SABFordererganzungsdarlehen}">
+                                <f:fields>
+                                    <CheckBox id="Antrag_KoFi_Fremdmittel_SABFordererganzungsdarlehen"
+                                              tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_SABFordererganzungsdarlehen}"
+                                              selected="{
+												path : 'antragsData>/Antrag_KoFi_Fremdmittel_SABFordererganzungsdarlehen/value',
+												type : 'sap.ui.model.type.Boolean'
+												}"
+                                              text="vorhanden" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Betrag/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit_Monate/value',
+													type : 'sap.ui.model.type.Integer',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Gesamtlaufzeit/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgung/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Tilgungsfreijahre/value',
+													type : 'sap.ui.model.type.Integer',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung_Monate}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung_Monate"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung_Monate}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung_Monate/value',
+													type : 'sap.ui.model.type.Integer',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung"
+                                           tooltip="{i18n>ttAntrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Fremdmittel_GruppeFordererganzungsdarlehen_Zinsfestschreibung/value',
+													type : 'sap.ui.model.type.String',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minLength : 0,
+														maxLength : 30
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="{i18n>Antrag_KoFi_Gesamtfinanzierung}">
+                                <f:fields>
+                                    <Input id="Antrag_KoFi_Gesamtfinanzierung"
+                                           tooltip="{i18n>ttAntrag_KoFi_Gesamtfinanzierung}"
+                                           valueStateText="Error state"
+                                           width="15em"
+                                           value="{
+													path : 'antragsData>/Antrag_KoFi_Gesamtfinanzierung/value',
+													type : 'sap.ui.model.type.Float',
+													formatOptions : {
+														groupingEnabled : true
+													},
+													constraints : {
+														minimum : 0,
+														maximum : 100000000
+													}
+												}"
+                                    />
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </content>
+
+        <footer>
+            <Toolbar
+                    id="otbFooter">
+                <Button
+                        icon="sap-icon://alert"
+                        text="{= ${message>/}.length }"
+                        visible="{= ${message>/}.length > 0 }"
+                        type="Emphasized"
+                        press="onMessagePopoverPress"/>
+
+                <ToolbarSpacer/>
+                <Button type="Accept" text="{i18n>saveAndQuit}" class="sapUiTinyMarginEnd" press="onValidateBtnPress">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+                <Button type="Reject" text="{i18n>reject}" press="onHandleReject" class="sapUiSmallMarginEnd">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                    </layoutData>
+                </Button>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

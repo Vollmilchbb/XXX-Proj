@@ -82,7 +82,7 @@
 				"name": "standardunterlagen",
 				"target": "standardunterlagen"
 			}, {
-				"pattern": "antragsdaten/Bonietaetsdaten",
+				"pattern": "antragsdaten/Kosten&Finanzierungsdaten",
 				"name": "allgBonitaetsunterlagen",
 				"target": "allgBonitaetsunterlagen"
 			}, {
@@ -137,7 +137,7 @@
 				"allgBonitaetsunterlagen" : {
 					"viewId": "allgBonitaetsunterlagen",
 					"viewPath": "de.sachsen.sab.antrdatpruf.view.antragsdatenerfassung",
-					"viewName": "Bonitaetsdaten",
+					"viewName": "KostenFinanzierungsdaten",
 					"viewLevel": 3,
 					"transition": "flip"
 				},

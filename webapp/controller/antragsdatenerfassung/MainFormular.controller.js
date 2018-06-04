@@ -3,7 +3,7 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil",
-    "de/sachsen/sab/antrdatpruf/camunda/rest-api-bundle",
+    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "de/sachsen/sab/antrdatpruf/controller/antragsdatenerfassung/DocumentTreeItem",
     'sap/ui/core/message/Message',
 ], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message) {
@@ -253,7 +253,6 @@ sap.ui.define([
             } catch (e) {
                 jQuery.sap.log.info("Keine Errorcodes fuer Dokumente vorhanden." + e);
             }
-            //todo hier eingeben welche errprüfungen falsch sind
             this._initTreeMissingDocsItems(aProp);
             if (aProp !== 'undefined' && Array.isArray(aProp) && !(aProp.length > 0)) {
                 sap.ui.getCore().getMessageManager().addMessages(new Message({
@@ -339,7 +338,7 @@ sap.ui.define([
         },
 
         /**
-         * Complete camunda task
+         * Complete generated task
          * @private
          */
         _completeTask: function () {
@@ -360,7 +359,7 @@ sap.ui.define([
         /**
          * get Taskid
          *
-         * @returns {string} TaskID of the camunda task
+         * @returns {string} TaskID of the generated task
          * @private
          */
         _getTaskId() {
