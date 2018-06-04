@@ -187,6 +187,10 @@ sap.ui.define([
             window.location.replace("http://www.google.de");
         },
 
+        onAbmeldenOhneSpeichern: function () {
+            window.location.replace("http://www.google.de");
+        },
+
         /**
          * set models on the view for the GP and Kunde
          * TODO GP anbindung
