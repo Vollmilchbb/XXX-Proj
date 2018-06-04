@@ -23722,7 +23722,7 @@ Emitter.prototype.removeEventListener = function(event, fn){
      */
 			ProcessDefinitionApi: ProcessDefinitionApi,
 			/**
-     * The ProcessInstanceApi service constructor.
+     * The ProcessInstanceApi service constructor.var
      * @property {module:api/ProcessInstanceApi}
      */
 			ProcessInstanceApi: ProcessInstanceApi,

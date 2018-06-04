@@ -168,6 +168,25 @@ sap.ui.define([
             this.getRouter().navTo("sachverhaltNichtKlaerbar");
         },
 
+        onAbmeldenZwischenspeichern: function () {
+            let taskApi = new Camunda.RestApi.TaskApi(),
+                taskId = this._getTaskId();
+            oModel = this.getView().getModel("antragsData").getData();
+            let opts = {'body': oModel};
+            if (taskId) {
+                taskApi.modifyVariables_0(taskId, opts, function (error, data, response) {
+                    if (error) {
+                        jQuery.sap.log.info('an error occured: ' + error);
+                    } else {
+                        MessageToast.show('Aenderungen erfolgreich zwischengespeichert');
+                        let taskJson = JSON.parse(response.text);
+                        jQuery.sap.log.info('an error occured: ' + taskJson);
+                    }
+                });
+            }
+            window.location.replace("http://www.google.de");
+        },
+
         /**
          * set models on the view for the GP and Kunde
          * TODO GP anbindung
@@ -209,7 +228,8 @@ sap.ui.define([
                 }
             });
             this.getView().setModel(oModelGP, "modelGPKunde");
-        },
+        }
+        ,
 
         /* =========================================================== */
         /* internal methods                                            */
@@ -219,9 +239,8 @@ sap.ui.define([
          * Here we validate the "/Liste_nicht_vorhandener_Dokumente" property and if it contain errors we display them on the view.
          */
         _handleRouteMatched: function () {
+            let aProp;
             sap.ui.getCore().getMessageManager().removeAllMessages();
-            let view = this.getView(),
-                aProp;
             try {
                 let oAntragsData = sap.ui.getCore().getModel("antragsData");
                 aProp = oAntragsData.getProperty("/gepruefte_daten").value;
@@ -237,7 +256,8 @@ sap.ui.define([
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }
             }
-        },
+        }
+        ,
 
         /**
          * Init the tree behaviour when docs are missing
@@ -262,7 +282,8 @@ sap.ui.define([
                     description: 'Die Dokumente sind allesamt vollst\u00e4ndig'
                 }));
             }
-        },
+        }
+        ,
 
         /**
          * Sets the custom docTreeItem to the Trees Item property.
@@ -283,7 +304,8 @@ sap.ui.define([
             });
             oTree.bindItems("/", oStandardTreeItem);
             this._informMissingDocs(aProperties);
-        },
+        }
+        ,
 
         /**
          * Init TreeDocument with initial data
@@ -294,18 +316,20 @@ sap.ui.define([
             //treeModel.loadData("/webapp/json/docTree.json", "", false);
             treeModel.loadData("json/docTree.json", "", false);
             this.getView().byId("treeDocsId").setModel(treeModel);
-        },
+        }
+        ,
 
         /**
          * Init errMsgPopover which displays the amount of errors on current form
          *
          * @param oView
          */
-        _initErrMsgPopover: function(oView) {
+        _initErrMsgPopover: function (oView) {
             oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "message");
             //oMessageManager.registerObject(oView, true);
-        },
+        }
+        ,
 
         /**
          * Returns a singleton MessagePopover Object
@@ -319,7 +343,8 @@ sap.ui.define([
                 this.getView().addDependent(this._oMessagePopover);
             }
             return this._oMessagePopover;
-        },
+        }
+        ,
 
         /**
          * create messages for each missing doc string
@@ -335,7 +360,8 @@ sap.ui.define([
                     title: 'Fehlendes Dokument'
                 }));
             });
-        },
+        }
+        ,
 
         /**
          * Complete generated task
@@ -353,8 +379,10 @@ sap.ui.define([
                     let taskJson = JSON.parse(response.text);
                     console.log(taskJson);
                 }
+
             });
-        },
+        }
+        ,
 
         /**
          * get Taskid
@@ -366,4 +394,5 @@ sap.ui.define([
             return this._taskId || null;
         }
     });
-});
+})
+;
