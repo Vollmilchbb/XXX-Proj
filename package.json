@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "grunt": "^1.0.2",
+    "@sabdd/grunt-sonar-runner": "^2.5.0-beta-sab-fixes",
+    "grunt": "^1.0.3",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-connect": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
@@ -14,12 +15,11 @@
     "grunt-eslint": "^20.1.0",
     "grunt-openui5": "^0.13.0",
     "grunt-shell": "^2.1.0",
-    "@sabdd/grunt-sonar-runner": "^2.5.0-beta-sab-fixes",
     "grunt-zip": "^0.17.0"
   },
   "dependencies": {
     "eslint": "^4.19.1",
-    "grunt-nwabap-ui5uploader": "^0.2.8",
+    "grunt-nwabap-ui5uploader": "^0.2.9",
     "npm": "^6.1.0",
     "phantomjs": "^2.1.7",
     "phantomjs-prebuilt": "^2.1.16"
