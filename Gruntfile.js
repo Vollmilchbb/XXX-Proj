@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     let sonarProjectKey = grunt.option('sonar.projectKey');
     let sonarBranch = grunt.option('sonar.branch');
     let sonarAnalysisMode = grunt.option('sonar.analysis.mode');
-    let sonarExclusions = grunt.option('sonar.exclusions');
+    let sonarExclusions = grunt.option('sonar.javascript.exclusions');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -134,7 +134,9 @@ module.exports = function(grunt) {
                         projectVersion: '<%= pkg.version %>',
                         language: 'js',
                         sourceEncoding: 'UTF-8',
-                        sonarExclusions: sonarExclusions,
+                        javascript: {
+                            exclusions: sonarExclusions
+                        },
                         analysis: {
                             mode: sonarAnalysisMode
                         },

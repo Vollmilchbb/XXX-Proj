@@ -19,7 +19,7 @@ sap.ui.define([
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
             //attach route matched for external call
             //UNCOMMENT THIS
-            //this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
+            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
             //set busy
 
