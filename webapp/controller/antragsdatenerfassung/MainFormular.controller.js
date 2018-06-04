@@ -171,7 +171,7 @@ sap.ui.define([
         onAbmeldenZwischenspeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId();
-            oModel = this.getView().getModel("antragsData").getData();
+            let oModel = this.getView().getModel("antragsData").getData();
             let opts = {'body': oModel};
             if (taskId) {
                 taskApi.modifyVariables_0(taskId, opts, function (error, data, response) {
@@ -329,7 +329,7 @@ sap.ui.define([
          * @param oView
          */
         _initErrMsgPopover: function (oView) {
-            oMessageManager = sap.ui.getCore().getMessageManager();
+            let oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "message");
             //oMessageManager.registerObject(oView, true);
         }
@@ -374,14 +374,14 @@ sap.ui.define([
         _completeTask: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId();
-            oModel = this.getView().getModel("antragsData").getData();
+            let oModel = this.getView().getModel("antragsData").getData();
             let opts = {'body': oModel};
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
-                    console.log('an error occured: ' + error);
+                    jQuery.sap.log.info('an error occures ' + error);
                 } else {
                     let taskJson = JSON.parse(response.text);
-                    console.log(taskJson);
+                    jQuery.sap.log.info(taskJson);
                 }
 
             });

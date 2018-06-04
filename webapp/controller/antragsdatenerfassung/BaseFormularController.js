@@ -182,7 +182,7 @@ sap.ui.define([
          * @param oView
          */
         initErrMsgPopover(oView) {
-            oMessageManager = sap.ui.getCore().getMessageManager();
+            let oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "message");
             oMessageManager.registerObject(oView, true);
         },
@@ -219,8 +219,8 @@ sap.ui.define([
             this._destroyErrMsgStrip();
             let oPage = this.getView().byId("page");
 
-            oE = this.byId("oVerticalContent");
-            oMsgStrip = new MessageStrip("msgStrip", {
+            let oE = this.byId("oVerticalContent");
+            let oMsgStrip = new MessageStrip("msgStrip", {
                 text: sMsg,
                 showCloseButton: true,
                 showIcon: true,
