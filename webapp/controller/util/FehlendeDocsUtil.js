@@ -25,7 +25,7 @@ sap.ui.define([
                 aFehlerCodes.forEach(function(item) {
                     try {
                         let oItem = oView.byId(item.variable);
-                        if (oItem instanceof sap.ui.core.Control) {
+                        if (oItem && oItem instanceof sap.ui.core.Control) {
                             oItem.setValueState('Error');
                             oItem.setValueStateText(item.error_text);
                         }
