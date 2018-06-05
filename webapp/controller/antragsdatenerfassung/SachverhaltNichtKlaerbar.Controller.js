@@ -30,7 +30,7 @@ sap.ui.define([
          * onAbbruch click event handler
          */
         onAbbruch: function() {
-            this.onNavBack();
+            this.getRouter().navTo("antragsDatenErfassung");
         },
 
         /**

@@ -88,7 +88,7 @@ sap.ui.define([
             //If some of the docs which are missing are contained in the parent node, then set the parent node
             //state to ERROR too
             let sNodeText = this.getBindingContext().getObject().text;
-            if (Array.isArray(aMissingDocs) && aMissingDocs.length > 0) {
+            if (aMissingDocs.length > 0) {
                 for (let [key, value] of mDocsArrays) {
                     if (sNodeText.localeCompare(key) === 0) {
                         aMissingDocs.forEach(sMissingDoc => {

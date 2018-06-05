@@ -19,7 +19,7 @@ sap.ui.define([
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
             //attach route matched for external call
             //UNCOMMENT THIS
-            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
+            //this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
             //set busy
 
@@ -30,6 +30,7 @@ sap.ui.define([
 
             //debug zeug
             let oModeljson = new sap.ui.model.json.JSONModel();
+            //http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/
             oModeljson.loadData("json/antragsData2.json", "", false);
 
             this.getView().setModel(oModeljson, "antragsData");
@@ -121,28 +122,28 @@ sap.ui.define([
          * On Plausibilitaet der Bonitaetsunterlagen click
          */
         onPlausiBonitaetsUnterlagen: function () {
-            this.getRouter().navTo("plausiBonitaetsUnterlagen")
+            this.getRouter().navTo("plausiBonitaetsUnterlagen");
         },
 
         /**
          * On AntraegeVorhanden click
          */
         onRichtigkeitAntragsdaten: function () {
-            this.getRouter().navTo("richtigkeitAntragsdaten")
+            this.getRouter().navTo("richtigkeitAntragsdaten");
         },
 
         /**
          * Richtigkeit AntragsDaten click
          */
         onAntraegeVorhanden: function () {
-            this.getRouter().navTo("antraegeVorhanden")
+            this.getRouter().navTo("antraegeVorhanden");
         },
 
         /**
          * BonitaetsUnterlagen Nicht Selbststaendig
          */
         onPrufBonUnlNichtSelbstst: function () {
-            this.getRouter().navTo("vorhabensdaten")
+            this.getRouter().navTo("vorhabensdaten");
         },
 
         /**
@@ -196,41 +197,11 @@ sap.ui.define([
          * TODO GP anbindung
          */
         _initGeschaeftsVPModel: function () {
-            let oModel = new sap.ui.model.json.JSONModel({
-                "AntragsStatus": {
-                    "type": "String",
-                    "value": "Offen",
-                    "valueInfo": {}
-                },
-                "DatumAntragserfassung": {
-                    "type": "String",
-                    "value": "08.05.2018",
-                    "valueInfo": {}
-                },
-                "ProduktName": {
-                    "type": "String",
-                    "value": "ProduktnameXY",
-                    "valueInfo": {}
-                }
-            });
+            let oModel = new sap.ui.model.json.JSONModel();
+            oModel.loadData("http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/json/geschaeftsvorfall.json", "", false);
             this.getView().setModel(oModel, "modelGeschVorfall");
-            let oModelGP = new sap.ui.model.json.JSONModel({
-                "GeschaeftspartnerNr": {
-                    "type": "String",
-                    "value": "2002102718",
-                    "valueInfo": {}
-                },
-                "Telefonnummer": {
-                    "type": "String",
-                    "value": "+4935955779750",
-                    "valueInfo": {}
-                },
-                "NameVorname": {
-                    "type": "String",
-                    "value": "Daniela Hirschberg",
-                    "valueInfo": {}
-                }
-            });
+            let oModelGP = new sap.ui.model.json.JSONModel();
+            oModelGP.loadData("http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/json/geschpartn.json", "", false);
             this.getView().setModel(oModelGP, "modelGPKunde");
         }
         ,
@@ -308,8 +279,7 @@ sap.ui.define([
             });
             oTree.bindItems("/", oStandardTreeItem);
             this._informMissingDocs(aProperties);
-        }
-        ,
+        },
 
         /**
          * Init TreeDocument with initial data
@@ -320,8 +290,7 @@ sap.ui.define([
             //treeModel.loadData("/webapp/json/docTree.json", "", false);
             treeModel.loadData("json/docTree.json", "", false);
             this.getView().byId("treeDocsId").setModel(treeModel);
-        }
-        ,
+        },
 
         /**
          * Init errMsgPopover which displays the amount of errors on current form
@@ -332,8 +301,7 @@ sap.ui.define([
             let oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "message");
             //oMessageManager.registerObject(oView, true);
-        }
-        ,
+        },
 
         /**
          * Returns a singleton MessagePopover Object
@@ -347,8 +315,7 @@ sap.ui.define([
                 this.getView().addDependent(this._oMessagePopover);
             }
             return this._oMessagePopover;
-        }
-        ,
+        },
 
         /**
          * create messages for each missing doc string
@@ -364,8 +331,7 @@ sap.ui.define([
                     title: 'Fehlendes Dokument'
                 }));
             });
-        }
-        ,
+        },
 
         /**
          * Complete generated task
@@ -378,15 +344,18 @@ sap.ui.define([
             let opts = {'body': oModel};
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
+                    sap.ui.getCore().getMessageManager().addMessages(new Message({
+                        message: 'Die Task konnte nicht beendet werden!',
+                        type: 'Error',
+                        title: 'failed to complete task'
+                    }));
                     jQuery.sap.log.info('an error occures ' + error);
                 } else {
-                    let taskJson = JSON.parse(response.text);
-                    jQuery.sap.log.info(taskJson);
+                    jQuery.sap.log.info(response);
                 }
 
             });
-        }
-        ,
+        },
 
         /**
          * get Taskid
