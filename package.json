@@ -28,5 +28,7 @@
     "phantomjs-prebuilt": "^2.1.16",
     "qunit": "^2.6.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm": "^6.1.0"
+  }
 }

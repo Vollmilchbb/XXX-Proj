@@ -3,10 +3,11 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil",
+    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "de/sachsen/sab/antrdatpruf/controller/antragsdatenerfassung/DocumentTreeItem",
     "sap/ui/core/message/Message",
-    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle"
-], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, DocumentTreeItem, Message, camundajs) {
+    "sap/m/MessageBox"
+], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message, MessageBox) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.MainFormular", {
 
@@ -19,7 +20,7 @@ sap.ui.define([
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
             //attach route matched for external call
             //UNCOMMENT THIS
-            //this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
+            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched2, this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
             //set busy
 
@@ -47,8 +48,8 @@ sap.ui.define([
         /* =========================================================== */
 
         _onExternalCallMatched: function () {
-            let that = this;
-            let core = sap.ui.getCore();
+            let that = this,
+                core = sap.ui.getCore();
             let taskId;
             let startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
             if ((startupParams.taskId && startupParams.taskId[0])) {
@@ -65,7 +66,7 @@ sap.ui.define([
                             processID,
                             function (error, data, response) {
                                 if (error) {
-                                    //sap.ui.getCore().oBusyDialogGlobal.close();
+                                    sap.ui.getCore().oBusyDialogGlobal.close();
                                     sap.ui.getCore().getMessageManager().addMessages(new Message({
                                         message: 'Antragsdaten konnten nicht ermittelt werden',
                                         type: 'Error',
@@ -85,32 +86,6 @@ sap.ui.define([
             } else {
                 jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
             }
-        },
-
-
-        _onExternalCallMatched2: function () {
-            let processID = 'db782338-64d7-11e8-b21c-005056ac4b24';
-            let oModel = this.getView().getModel("antragsData");
-            let processApi = new Camunda.RestApi.ProcessInstanceApi();
-            processApi.getVariablesResource(
-                processID,
-                function (error, data, response) {
-                    if (error) {
-                        sap.ui.getCore().oBusyDialogGlobal.close();
-                        sap.ui.getCore().getMessageManager().addMessages(new Message({
-                            message: 'Antragsdaten konnten nicht ermittelt werden',
-                            type: 'Error',
-                            title: 'Verbindungsfehler',
-                            description: 'Eventuell besteht ein Verbindungsproblem mit Camunda'
-                        }));
-                    } else {
-                        sap.ui.getCore().oBusyDialogGlobal.close();
-                        oModel.setData(JSON.parse(response.text));
-                        sap.ui.getCore.setModel(oModel, "antragsData");
-                        that.getView().setModel(oModel, "antragsData");
-                    }
-                }
-            );
         },
 
         /**
@@ -210,14 +185,14 @@ sap.ui.define([
                     }
                 });
             }
-            window.location.replace("");
+            this._navigateBackToInbox();
         },
 
         /*
          * net wundern wurde so gewuenscht vom test : ))
          */
         onAbmeldenOhneSpeichern: function () {
-            window.location.replace("http://www.sab-dresden.de/de/");
+            this._navigateBackToInbox();
         },
 
         /**
@@ -258,8 +233,7 @@ sap.ui.define([
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }
             }
-        }
-        ,
+        },
 
         /**
          * Init the tree behaviour when docs are missing
@@ -314,6 +288,7 @@ sap.ui.define([
          */
         _initTreeMissingDocsModel: function () {
             let treeModel = new sap.ui.model.json.JSONModel();
+            //treeModel.loadData("/webapp/json/docTree.json", "", false);
             treeModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/docTree.json"), "", false);
             this.getView().byId("treeDocsId").setModel(treeModel);
         },
@@ -371,7 +346,7 @@ sap.ui.define([
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
                     sap.ui.getCore().getMessageManager().addMessages(new Message({
-                        message: 'Die Task konnte nicht beendet werden!' + error,
+                        message: 'Die Task konnte nicht beendet werden!',
                         type: 'Error',
                         title: 'failed to complete task'
                     }));
@@ -390,9 +365,40 @@ sap.ui.define([
          * @returns {string} TaskID of the generated task
          * @private
          */
-        _getTaskId() {
+        _getTaskId: function () {
             return this._taskId || null;
+        },
+
+
+        /**
+         * navigate back to Inbox-App per semantic object navigation
+         *
+         * @private
+         */
+        _navigateBackToInbox: function () {
+            try {
+                let oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation"); // get a handle on the global XAppNav service
+                let hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+                    target: {
+                        semanticObject: 'zDTINBOX',
+                        action: "display"
+                    },
+                    params: {
+                        "taskId": null,
+                        "protocol": null
+                    }
+                })) || ""; // generate the Hash to display a Supplier
+                oCrossAppNavigator.toExternal({
+                    target: {
+                        shellHash: hash
+                    }
+                }); // navigate to Supplier application
+            } catch (e) {
+                MessageBox.error(this.getResourceBundle().getText('CrossNavigationNotSupported'), {
+                    styleClass: this.getOwnerComponent().getContentDensityClass()
+                });
+                return null;
+            }
         }
     });
-})
-;
+});
