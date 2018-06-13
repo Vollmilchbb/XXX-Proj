@@ -7,8 +7,6 @@
 	xmlns="sap.m"
 	displayBlock="true">
 	<Page id="formularDAP" title="{i18n>antrdaterfassung}"
-		showNavButton="true"
-		navButtonPress="onNavBack"
 		class="sapUiResponsiveContentPadding">
 		<content>
 		<l:VerticalLayout id="containerLayout" width="100%" >

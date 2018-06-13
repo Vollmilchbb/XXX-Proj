@@ -3,10 +3,10 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil",
-    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "de/sachsen/sab/antrdatpruf/controller/antragsdatenerfassung/DocumentTreeItem",
-    'sap/ui/core/message/Message',
-], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message) {
+    "sap/ui/core/message/Message",
+    "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle"
+], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, DocumentTreeItem, Message, camundajs) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.MainFormular", {
 
@@ -30,8 +30,7 @@ sap.ui.define([
 
             //debug zeug
             let oModeljson = new sap.ui.model.json.JSONModel();
-            //http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/
-            oModeljson.loadData("json/antragsData2.json", "", false);
+            oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData2.json"), "", false);
 
             this.getView().setModel(oModeljson, "antragsData");
             sap.ui.getCore().setModel(oModeljson, "antragsData");
@@ -49,6 +48,7 @@ sap.ui.define([
 
         _onExternalCallMatched: function () {
             let that = this;
+            let core = sap.ui.getCore();
             let taskId;
             let startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
             if ((startupParams.taskId && startupParams.taskId[0])) {
@@ -65,7 +65,7 @@ sap.ui.define([
                             processID,
                             function (error, data, response) {
                                 if (error) {
-                                    sap.ui.getCore().oBusyDialogGlobal.close();
+                                    //sap.ui.getCore().oBusyDialogGlobal.close();
                                     sap.ui.getCore().getMessageManager().addMessages(new Message({
                                         message: 'Antragsdaten konnten nicht ermittelt werden',
                                         type: 'Error',
@@ -75,8 +75,8 @@ sap.ui.define([
                                 } else {
                                     sap.ui.getCore().oBusyDialogGlobal.close();
                                     oModel.setData(JSON.parse(response.text));
-                                    sap.ui.getCore.setModel(oModel, "antragsData");
                                     that.getView().setModel(oModel, "antragsData");
+                                    core.setModel(oModel, "antragsData");
                                 }
                             }
                         );
@@ -88,13 +88,38 @@ sap.ui.define([
         },
 
 
+        _onExternalCallMatched2: function () {
+            let processID = 'db782338-64d7-11e8-b21c-005056ac4b24';
+            let oModel = this.getView().getModel("antragsData");
+            let processApi = new Camunda.RestApi.ProcessInstanceApi();
+            processApi.getVariablesResource(
+                processID,
+                function (error, data, response) {
+                    if (error) {
+                        sap.ui.getCore().oBusyDialogGlobal.close();
+                        sap.ui.getCore().getMessageManager().addMessages(new Message({
+                            message: 'Antragsdaten konnten nicht ermittelt werden',
+                            type: 'Error',
+                            title: 'Verbindungsfehler',
+                            description: 'Eventuell besteht ein Verbindungsproblem mit Camunda'
+                        }));
+                    } else {
+                        sap.ui.getCore().oBusyDialogGlobal.close();
+                        oModel.setData(JSON.parse(response.text));
+                        sap.ui.getCore.setModel(oModel, "antragsData");
+                        that.getView().setModel(oModel, "antragsData");
+                    }
+                }
+            );
+        },
+
         /**
          * send email action static showcase
          * //TODO GP ANBINDUNG
          *
          */
         onSendGPMail: function () {
-            sap.m.URLHelper.triggerEmail("gpmail@some-mail.com", "SAB-Subject", "Hallo GP, \n  wir benötigen zusaetzlich noch die Formulare XYZ, AYZ, ZZZ und BCA. \nGruezli");
+            sap.m.URLHelper.triggerEmail("gpmail@some-mail.com", "SAB-Subject", "Hallo GP, \n  wir benoetigen zusaetzlich noch die Formulare XYZ, AYZ, ZZZ und BCA. \nGruezli");
         },
 
         /**
@@ -147,6 +172,13 @@ sap.ui.define([
         },
 
         /**
+         * On Sachverhalt nicht klaerbar press
+         */
+        onSachverhaltNichtKlaerbar: function () {
+            this.getRouter().navTo("sachverhaltNichtKlaerbar");
+        },
+
+        /**
          * Display the ErrMsgPopover over the caller element
          *
          * @param {Object} oEvent the event
@@ -160,13 +192,6 @@ sap.ui.define([
          */
         onSachverhaltGeklaert: function () {
             this._completeTask();
-        },
-
-        /**
-         * On Sachverhalt nicht klaerbar press
-         */
-        onSachverhaltNichtKlaerbar: function () {
-            this.getRouter().navTo("sachverhaltNichtKlaerbar");
         },
 
         onAbmeldenZwischenspeichern: function () {
@@ -185,11 +210,14 @@ sap.ui.define([
                     }
                 });
             }
-            window.location.replace("http://www.google.de");
+            window.location.replace("");
         },
 
+        /*
+         * net wundern wurde so gewuenscht vom test : ))
+         */
         onAbmeldenOhneSpeichern: function () {
-            window.location.replace("http://www.google.de");
+            window.location.replace("http://www.sab-dresden.de/de/");
         },
 
         /**
@@ -198,13 +226,12 @@ sap.ui.define([
          */
         _initGeschaeftsVPModel: function () {
             let oModel = new sap.ui.model.json.JSONModel();
-            oModel.loadData("http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/json/geschaeftsvorfall.json", "", false);
+            oModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/geschaeftsvorfall.json"), "", false);
             this.getView().setModel(oModel, "modelGeschVorfall");
             let oModelGP = new sap.ui.model.json.JSONModel();
-            oModelGP.loadData("http://sabvbsl2.sab-sap.os.itelligence.de:8000/sap/bc/ui5_ui5/sap/zdb_aprf_app/json/geschpartn.json", "", false);
+            oModelGP.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/geschpartn.json"), "", false);
             this.getView().setModel(oModelGP, "modelGPKunde");
-        }
-        ,
+        },
 
         /* =========================================================== */
         /* internal methods                                            */
@@ -287,8 +314,7 @@ sap.ui.define([
          */
         _initTreeMissingDocsModel: function () {
             let treeModel = new sap.ui.model.json.JSONModel();
-            //treeModel.loadData("/webapp/json/docTree.json", "", false);
-            treeModel.loadData("json/docTree.json", "", false);
+            treeModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/docTree.json"), "", false);
             this.getView().byId("treeDocsId").setModel(treeModel);
         },
 
@@ -338,19 +364,20 @@ sap.ui.define([
          * @private
          */
         _completeTask: function () {
-            let taskApi = new Camunda.RestApi.TaskApi(),
-                taskId = this._getTaskId();
+            let taskApi = new Camunda.RestApi.TaskApi();
+            let taskId = this._getTaskId() || 'db952198-64d7-11e8-b21c-005056ac4b24';
             let oModel = this.getView().getModel("antragsData").getData();
             let opts = {'body': oModel};
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
                     sap.ui.getCore().getMessageManager().addMessages(new Message({
-                        message: 'Die Task konnte nicht beendet werden!',
+                        message: 'Die Task konnte nicht beendet werden!' + error,
                         type: 'Error',
                         title: 'failed to complete task'
                     }));
                     jQuery.sap.log.info('an error occures ' + error);
                 } else {
+                    MessageToast.show('Die Task wurde erfolgreich beendet');
                     jQuery.sap.log.info(response);
                 }
 

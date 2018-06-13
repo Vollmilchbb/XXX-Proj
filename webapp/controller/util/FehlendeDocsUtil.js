@@ -5,7 +5,7 @@ sap.ui.define([
 
     let instance;
 
-    let mainFormularService = Object.extend("de.sachsen.sab.antrdatpruf.controller.util.FehlendeDocsUtil", {
+    let MainFormularService = Object.extend("de.sachsen.sab.antrdatpruf.controller.util.FehlendeDocsUtil", {
 
         //constructor : function(oView){
         //    this.iconStandardUnterlageID = oView.byId('iconStandardUnterlageID');
@@ -58,7 +58,7 @@ sap.ui.define([
     return {
         getInstance: function (oView) {
             if (!instance) {
-                instance = new mainFormularService(oView);
+                instance = new MainFormularService(oView);
             }
             return instance;
         }

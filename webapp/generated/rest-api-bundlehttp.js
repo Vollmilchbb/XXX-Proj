@@ -4162,7 +4162,7 @@ Emitter.prototype.removeEventListener = function(event, fn){
      * @type {String}
      * @default http://vmwls2t:27111/engine-rest/engine/default
      */
-				this.basePath = "https://vmcampte/engine-rest/engine/default".replace(/\/+$/, "");
+				this.basePath = "http://vmcampte:8080/engine-rest/engine/default".replace(/\/+$/, "");
 
 				/**
      * The authentication methods to be included for all API calls.

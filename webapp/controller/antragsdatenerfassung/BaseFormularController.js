@@ -174,6 +174,7 @@ sap.ui.define([
             } catch (err) {
                 jQuery.sap.log.info('an error occures ' + err);
             }
+            return null;
         },
 
         /**
