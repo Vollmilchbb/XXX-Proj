@@ -116,11 +116,6 @@
           "pattern": "antragsdaten/SachverhaltNichtKlaerbar",
           "name": "sachverhaltNichtKlaerbar",
           "target": "sachverhaltNichtKlaerbar"
-        },
-        {
-          "pattern": "antragsdaten/Test",
-          "name": "showTest",
-          "target": "showTest"
         }
       ],
       "targets": {
