@@ -169,7 +169,7 @@ sap.ui.define([
             this._completeTask();
         },
 
-        onAbmeldenZwischenspeichern: function () {
+        onZwischenSpeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId();
             let oModel = this.getView().getModel("antragsData").getData();
@@ -179,11 +179,10 @@ sap.ui.define([
                     if (error) {
                         jQuery.sap.log.info('an error occured: ' + error);
                     } else {
-                        MessageToast.show('Aenderungen erfolgreich zwischengespeichert');
+                        MessageToast.show(this.getResourceBundle().getText('aenderungenZwischengespeichert'));
                     }
                 });
             }
-            this._navigateBackToInbox();
         },
 
         /*
@@ -338,13 +337,13 @@ sap.ui.define([
          */
         _completeTask: function () {
             let taskApi = new Camunda.RestApi.TaskApi();
-            let taskId = this._getTaskId() || 'db952198-64d7-11e8-b21c-005056ac4b24';
+            let taskId = this._getTaskId();
             let oModel = this.getView().getModel("antragsData").getData();
             let opts = {'body': oModel};
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
                     sap.ui.getCore().getMessageManager().addMessages(new Message({
-                        message: 'Die Task konnte nicht beendet werden!',
+                        message: 'Die Task konnte nicht beendet werden! Fehler: ' + error,
                         type: 'Error',
                         title: 'failed to complete task'
                     }));

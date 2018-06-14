@@ -203,9 +203,9 @@
 						type="Emphasized"
 						press="onMessagePopoverPress" />
 				<ToolbarSpacer/>
-				<Button type="Accept" text="{i18n>OKSachverhalt}" class="sapUiTinyMarginEnd" press="onSachverhaltGeklaert">
+				<Button type="Accept" text="{i18n>OKSachverhalt}" press="onSachverhaltGeklaert" class="sapUiTinyMarginEnd" >
 				</Button>
-				<Button type="Ghost" text="{i18n>AbmeldenZS}" press="onAbmeldenZwischenspeichern" class="sapUiTinyMarginEnd">
+				<Button type="Accept" text="{i18n>OKZwischenSave}" press="onZwischenSpeichern" class="sapUiTinyMarginEnd">
 				</Button>
                 <Button type="Ghost" text="{i18n>AbmeldenOS}" press="onAbmeldenOhneSpeichern" class="sapUiTinyMarginEnd">
                 </Button>
