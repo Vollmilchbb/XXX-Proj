@@ -65,7 +65,7 @@ sap.ui.define([
          * Event handler for navigating back.
          * We navigate back in the browser history
          */
-        onNavBack: function () {
+        onNavBackFormular: function () {
             let bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             sap.m.MessageBox.show("Achtung: Die Daten werden nicht gespeichert \n" +
             "Details zeigen aktuelle Antragsdaten an", {

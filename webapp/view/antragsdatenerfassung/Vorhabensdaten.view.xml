@@ -4,7 +4,7 @@
           displayBlock="true">
 
     <Page id="page"
-          navButtonPress="onNavBack" showNavButton="true"
+          navButtonPress="onNavBackFormular" showNavButton="true"
           title="{i18n>bonitaetsDatenTitle}" enableScrolling="true">
         <content>
             <l:VerticalLayout id="oVerticalContent" width="100%"></l:VerticalLayout>

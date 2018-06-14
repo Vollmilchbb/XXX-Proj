@@ -3,7 +3,7 @@
           displayBlock="true">
 
     <Page id="page"
-                             semanticRuleSet="Optimized" navButtonPress="onNavBack" showNavButton="true"
+                             semanticRuleSet="Optimized" navButtonPress="onNavBackFormular" showNavButton="true"
                              title="{i18n>antragsDatenPruefTitle}">
         <content>
             <VBox class="sapUiLargeMarginEnd">

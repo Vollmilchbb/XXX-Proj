@@ -20,7 +20,7 @@ sap.ui.define([
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
             //attach route matched for external call
             //UNCOMMENT THIS
-            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
+            //this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
             //set busy
 
@@ -180,8 +180,6 @@ sap.ui.define([
                         jQuery.sap.log.info('an error occured: ' + error);
                     } else {
                         MessageToast.show('Aenderungen erfolgreich zwischengespeichert');
-                        let taskJson = JSON.parse(response.text);
-                        jQuery.sap.log.info('an error occured: ' + taskJson);
                     }
                 });
             }
