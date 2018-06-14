@@ -179,7 +179,7 @@ sap.ui.define([
                     if (error) {
                         jQuery.sap.log.info('an error occured: ' + error);
                     } else {
-                        MessageToast.show(this.getResourceBundle().getText('aenderungenZwischengespeichert'));
+                        MessageToast.show("\u00c4nderungen wurden erfolgreich zwischengespeichert");
                     }
                 });
             }
