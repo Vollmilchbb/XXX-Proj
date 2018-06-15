@@ -51,40 +51,42 @@ sap.ui.define([
             let that = this,
                 core = sap.ui.getCore();
             let taskId;
-            let startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
-            if ((startupParams.taskId && startupParams.taskId[0])) {
-                let taskApi = new Camunda.RestApi.TaskApi();
-                taskId = startupParams.taskId[0];
-                this._taskId = taskId;
-                taskApi.getTask(taskId, function (error, data, response) {
-                    let taskJson = JSON.parse(response.text);
-                    let processID = taskJson.processInstanceId;
-                    if (processID) {
-                        let oModel = that.getView().getModel("antragsData");
-                        let processApi = new Camunda.RestApi.ProcessInstanceApi();
-                        processApi.getVariablesResource(
-                            processID,
-                            function (error, data, response) {
-                                if (error) {
-                                    sap.ui.getCore().oBusyDialogGlobal.close();
-                                    sap.ui.getCore().getMessageManager().addMessages(new Message({
-                                        message: 'Antragsdaten konnten nicht ermittelt werden',
-                                        type: 'Error',
-                                        title: 'Verbindungsfehler',
-                                        description: 'Eventuell besteht ein Verbindungsproblem mit Camunda'
-                                    }));
-                                } else {
-                                    sap.ui.getCore().oBusyDialogGlobal.close();
-                                    oModel.setData(JSON.parse(response.text));
-                                    that.getView().setModel(oModel, "antragsData");
-                                    core.setModel(oModel, "antragsData");
+            if (!this._taskId) {
+                let startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
+                if ((startupParams.taskId && startupParams.taskId[0])) {
+                    let taskApi = new Camunda.RestApi.TaskApi();
+                    taskId = startupParams.taskId[0];
+                    this._taskId = taskId;
+                    taskApi.getTask(taskId, function (error, data, response) {
+                        let taskJson = JSON.parse(response.text);
+                        let processID = taskJson.processInstanceId;
+                        if (processID) {
+                            let oModel = that.getView().getModel("antragsData");
+                            let processApi = new Camunda.RestApi.ProcessInstanceApi();
+                            processApi.getVariablesResource(
+                                processID,
+                                function (error, data, response) {
+                                    if (error) {
+                                        sap.ui.getCore().oBusyDialogGlobal.close();
+                                        sap.ui.getCore().getMessageManager().addMessages(new Message({
+                                            message: 'Antragsdaten konnten nicht ermittelt werden',
+                                            type: 'Error',
+                                            title: 'Verbindungsfehler',
+                                            description: 'Eventuell besteht ein Verbindungsproblem mit Camunda'
+                                        }));
+                                    } else {
+                                        sap.ui.getCore().oBusyDialogGlobal.close();
+                                        oModel.setData(JSON.parse(response.text));
+                                        that.getView().setModel(oModel, "antragsData");
+                                        core.setModel(oModel, "antragsData");
+                                    }
                                 }
-                            }
-                        );
-                    }
-                });
-            } else {
-                jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
+                            );
+                        }
+                    });
+                } else {
+                    jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
+                }
             }
         },
 
@@ -339,6 +341,7 @@ sap.ui.define([
             let taskApi = new Camunda.RestApi.TaskApi();
             let taskId = this._getTaskId();
             let oModel = this.getView().getModel("antragsData").getData();
+            oModel = sap.ui.getCore().getModel("antragsData").getData();
             let opts = {'body': oModel};
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
@@ -350,7 +353,6 @@ sap.ui.define([
                     jQuery.sap.log.info('an error occures ' + error);
                 } else {
                     MessageToast.show('Die Task wurde erfolgreich beendet');
-                    jQuery.sap.log.info(response);
                 }
 
             });

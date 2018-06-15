@@ -33,13 +33,6 @@
 				<Text text="{modelGPKunde>/NameVorname/value}" />
 				<Label text="Telefonnummer" />
 				<Text text="{modelGPKunde>/Telefonnummer/value}" />
-			<FlexBox
-				alignItems="End"
-				justifyContent="End">
-				<items>
-					<Button text="Mehr Details" type="Emphasized" class="sapUiSmallMarginEnd" />
-				</items>
-			</FlexBox>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>

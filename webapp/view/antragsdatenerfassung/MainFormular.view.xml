@@ -13,7 +13,7 @@
 			<l:BlockLayout id="BlockLayout" background="Dashboard"> <!--  Light, Accent, Default, Dashboard -->
 				<l:BlockLayoutRow>
                     <l:BlockLayoutCell>
-						 <core:Fragment id="perfEval" fragmentName="de.sachsen.sab.antrdatpruf.view.fragmente.InfoGeschaeftspartner" type="XML"/>
+						<core:Fragment id="perfEval" fragmentName="de.sachsen.sab.antrdatpruf.view.fragmente.InfoGeschaeftspartner" type="XML"/>
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell>
 						<core:Fragment id="kundeEval" fragmentName="de.sachsen.sab.antrdatpruf.view.fragmente.InfoKunde" type="XML"/>

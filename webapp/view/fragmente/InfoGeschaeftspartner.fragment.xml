@@ -28,14 +28,6 @@
 				<Text text="{modelGeschVorfall>/DatumAntragserfassung/value}" />
 				<Label text="Status des Antrages" />
 				<Text text="{modelGeschVorfall>/AntragsStatus/value}" />
-			<FlexBox
-				alignItems="End"
-				justifyContent="End">
-				<items>
-					<Button text="Dokuemente aufrufen" type="Emphasized" class="sapUiSmallMarginEnd" />
-					<Button text="Daten aufrufen" type="Emphasized" class="sapUiSmallMarginEnd" />
-				</items>
-			</FlexBox>
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
