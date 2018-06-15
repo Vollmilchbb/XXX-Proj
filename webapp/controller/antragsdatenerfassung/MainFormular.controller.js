@@ -174,7 +174,8 @@ sap.ui.define([
         onZwischenSpeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId();
-            let oModel = this.getView().getModel("antragsData").getData();
+            let oModel = sap.ui.getCore().getModel("antragsData").getData();
+
             let opts = {'body': oModel};
             if (taskId) {
                 taskApi.modifyVariables_0(taskId, opts, function (error, data, response) {
