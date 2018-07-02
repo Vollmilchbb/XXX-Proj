@@ -22,6 +22,8 @@
                     </l:BlockLayoutRow>
                     <l:BlockLayoutRow>
                         <l:BlockLayoutCell title="{i18n>sachverhaltNichtKlaerbar}">
+                            <TextArea placeholder="Betreff:" growing="true" growingMaxLines="25" width="100%"
+                                      rows="1" valueLiveUpdate="true"/>
                             <TextArea placeholder="Bitte geben Sie den Grund fuer die Sachverhaltsablehnung ein." growing="true" growingMaxLines="25" width="100%"
                             rows="15" valueLiveUpdate="true"/>
                         </l:BlockLayoutCell>

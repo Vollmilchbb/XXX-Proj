@@ -22,6 +22,15 @@ sap.ui.define([
 
 		getModel : function(name) {
 			return this.getView().getModel(name) || this.getOwnerComponent().getModel(name);
-		}
+		},
+
+        /**
+         * Getter for the resource bundle.
+         * @public
+         * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
+         */
+        getResourceBundle: function() {
+            return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+        },
 	});
 });

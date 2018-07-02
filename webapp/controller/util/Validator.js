@@ -39,10 +39,10 @@ sap.ui.define([
      */
     Validator.prototype._validate = function (oControl) {
         let aPossibleAggregations = ["items", "content", "form", "formContainers", "formElements", "fields"],
-            aControlAggregation   = null,
-            oControlBinding       = null,
-            aValidateProperties   = ["value", "selectedKey", "text"], //validate Select and Text controls too
-            isValidatedControl    = false,
+            aControlAggregation = null,
+            oControlBinding = null,
+            aValidateProperties = ["value", "selectedKey", "text"], //validate Select and Text controls too
+            isValidatedControl = false,
             oExternalValue, oInternalValue,
             i, j;
 
@@ -62,23 +62,21 @@ sap.ui.define([
                             // try validating the bound value
                             try {
                                 oControlBinding = oControl.getBinding(aValidateProperties[i]);
-                                oExternalValue  = oControl.getProperty(aValidateProperties[i]);
-                                oInternalValue  = oControlBinding.getType().parseValue(oExternalValue, oControlBinding.sInternalType);
+                                oExternalValue = oControl.getProperty(aValidateProperties[i]);
+                                oInternalValue = oControlBinding.getType().parseValue(oExternalValue, oControlBinding.sInternalType);
                                 oControlBinding.getType().validateValue(oInternalValue);
                                 //if successfull set the controls back to original state
-                               // oControl.setValueState(sap.ui.core.ValueState.None);
-                            }
-                                // catch any validation errors
-                            catch (ex) {
+                                // oControl.setValueState(sap.ui.core.ValueState.None);
+                            } catch (ex) {                            // catch any validation errors
                                 this._isValid = false;
                                 oControlBinding = oControl.getBinding(aValidateProperties[i]);
                                 //set control state to error, mby useful?
-                               // oControl.setValueState(sap.ui.core.ValueState.Error);
+                                // oControl.setValueState(sap.ui.core.ValueState.Error);
                                 sap.ui.getCore().getMessageManager().addMessages(
                                     new Message({
-                                        message  : ex.message,
-                                        type     : MessageType.Error,
-                                        target   : ( oControlBinding.getContext() ? oControlBinding.getContext().getPath() + "/" : "") +
+                                        message: ex.message,
+                                        type: MessageType.Error,
+                                        target: (oControlBinding.getContext() ? oControlBinding.getContext().getPath() + "/" : "") +
                                         oControlBinding.getPath(),
                                         processor: oControl.getBinding(aValidateProperties[i]).getModel()
                                     })

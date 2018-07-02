@@ -19,12 +19,10 @@ sap.ui.define([
             this._oRouter = this.getRouter();
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
             //attach route matched for external call
-            //UNCOMMENT THIS
-            //this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
+
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
             //set busy
 
-            //UNCOMMENT THIS
             let oBusyDialogGlobal = new sap.m.BusyDialog();
             oBusyDialogGlobal.open();
             sap.ui.getCore().oBusyDialogGlobal = oBusyDialogGlobal;
@@ -32,7 +30,6 @@ sap.ui.define([
             //debug zeug
             let oModeljson = new sap.ui.model.json.JSONModel();
             oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData2.json"), "", false);
-
             this.getView().setModel(oModeljson, "antragsData");
             sap.ui.getCore().setModel(oModeljson, "antragsData");
 
@@ -41,6 +38,9 @@ sap.ui.define([
             this._initGeschaeftsVPModel();
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
+
+            //call to camnunda to get data
+            //this._onExternalCallMatched();
         },
 
         /* =========================================================== */
@@ -173,16 +173,25 @@ sap.ui.define([
 
         onZwischenSpeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
-                taskId = this._getTaskId();
-            let oModel = sap.ui.getCore().getModel("antragsData").getData();
+                taskId = this._getTaskId(),
+                oModel = sap.ui.getCore().getModel("antragsData").getData(),
+                oBundle = this.getResourceBundle();
+            let opts = {'body': {"modifications": JSON.stringify(oModel)}};
 
-            let opts = {'body': oModel};
             if (taskId) {
+                sap.ui.core.BusyIndicator.show();
                 taskApi.modifyVariables_0(taskId, opts, function (error, data, response) {
                     if (error) {
-                        jQuery.sap.log.info('an error occured: ' + error);
+                        sap.ui.getCore().getMessageManager().addMessages(new Message({
+                            message: oBundle.getText("SaveError"),
+                            type: "Error",
+                            title: oBundle.getText("SaveErrorTitle"),
+                            description: oBundle.getText("SaveErrorDescription")
+                        }));
+                        sap.ui.core.BusyIndicator.hide();
                     } else {
-                        MessageToast.show("\u00c4nderungen wurden erfolgreich zwischengespeichert");
+                        MessageToast.show(oBundle.getText("SaveSuccess"));
+                        sap.ui.core.BusyIndicator.hide();
                     }
                 });
             }
@@ -301,7 +310,6 @@ sap.ui.define([
         _initErrMsgPopover: function (oView) {
             let oMessageManager = sap.ui.getCore().getMessageManager();
             oView.setModel(oMessageManager.getMessageModel(), "message");
-            //oMessageManager.registerObject(oView, true);
         },
 
         /**
@@ -341,21 +349,27 @@ sap.ui.define([
         _completeTask: function () {
             let taskApi = new Camunda.RestApi.TaskApi();
             let taskId = this._getTaskId();
-            let oModel = this.getView().getModel("antragsData").getData();
+            let oBundle = this.getResourceBundle();
+            let that = this;
+            //oModel = this.getView().getModel("antragsData").getData();
             oModel = sap.ui.getCore().getModel("antragsData").getData();
-            let opts = {'body': oModel};
+            let opts = {'body': JSON.stringify({variables: oModel})};
+            sap.ui.core.BusyIndicator.show();
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
                     sap.ui.getCore().getMessageManager().addMessages(new Message({
-                        message: 'Die Task konnte nicht beendet werden! Fehler: ' + error,
-                        type: 'Error',
-                        title: 'failed to complete task'
+                        message: oBundle.getText("SaveTaskError", [error]),
+                        type: "Error",
+                        title: oBundle.getText("SaveTaskErrorTitle")
                     }));
-                    jQuery.sap.log.info('an error occures ' + error);
+                    sap.ui.core.BusyIndicator.hide();
                 } else {
-                    MessageToast.show('Die Task wurde erfolgreich beendet');
+                    MessageToast.show(oBundle.getText("TaskComplete"));
+                    sap.ui.core.BusyIndicator.hide();
+                    setTimeout(function(){
+                        that._navigateBackToInbox();
+                    },1000);
                 }
-
             });
         },
 
