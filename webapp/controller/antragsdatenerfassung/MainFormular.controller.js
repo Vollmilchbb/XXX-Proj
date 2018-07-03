@@ -6,8 +6,9 @@ sap.ui.define([
     "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "de/sachsen/sab/antrdatpruf/controller/antragsdatenerfassung/DocumentTreeItem",
     "sap/ui/core/message/Message",
-    "sap/m/MessageBox"
-], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message, MessageBox) {
+    "sap/m/MessageBox",
+    "de/sachsen/sab/antrdatpruf/controller/util/moment.min"
+], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message, MessageBox, momentjs) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.MainFormular", {
 
@@ -40,7 +41,7 @@ sap.ui.define([
             this._initErrMsgPopover(this.getView());
 
             //call to camnunda to get data
-            //this._onExternalCallMatched();
+            this._onExternalCallMatched();
         },
 
         /* =========================================================== */
@@ -77,6 +78,8 @@ sap.ui.define([
                                     } else {
                                         sap.ui.getCore().oBusyDialogGlobal.close();
                                         oModel.setData(JSON.parse(response.text));
+                                        //date anpassen test
+                                        oModel.setData(that._formatDatesInModel(oModel.getData()));
                                         that.getView().setModel(oModel, "antragsData");
                                         core.setModel(oModel, "antragsData");
                                     }
@@ -174,10 +177,13 @@ sap.ui.define([
         onZwischenSpeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId(),
-                oModel = sap.ui.getCore().getModel("antragsData").getData(),
                 oBundle = this.getResourceBundle();
-            let opts = {'body': {"modifications": JSON.stringify(oModel)}};
 
+            oModel = sap.ui.getCore().getModel("antragsData").getData();
+            let oModelToSave = jQuery.extend(true, {}, oModel);
+            this._deleteWrongDataFields(oModelToSave);
+
+            let opts = {'body': JSON.stringify({modifications: oModelToSave})};
             if (taskId) {
                 sap.ui.core.BusyIndicator.show();
                 taskApi.modifyVariables_0(taskId, opts, function (error, data, response) {
@@ -351,10 +357,14 @@ sap.ui.define([
             let taskId = this._getTaskId();
             let oBundle = this.getResourceBundle();
             let that = this;
-            //oModel = this.getView().getModel("antragsData").getData();
             oModel = sap.ui.getCore().getModel("antragsData").getData();
-            let opts = {'body': JSON.stringify({variables: oModel})};
+            oModelToSave = jQuery.extend(true, {}, oModel);
+            this._deleteWrongDataFields(oModelToSave);
+
+            let opts = {'body': JSON.stringify({variables: oModelToSave})};
+
             sap.ui.core.BusyIndicator.show();
+
             taskApi.complete(taskId, opts, function (error, data, response) {
                 if (error) {
                     sap.ui.getCore().getMessageManager().addMessages(new Message({
@@ -413,6 +423,36 @@ sap.ui.define([
                 });
                 return null;
             }
+        },
+
+
+        /**
+         * Es werden die Felder geloescht die nicht richtig von Camunda verarbeitet werden koennen
+         *
+         * @param oModel
+         * @private
+         */
+        _deleteWrongDataFields: function (oModel) {
+            delete oModel.gepruefte_daten;
+            delete oModel.Antrag_Gesamtpruefung_Adresse;
+            delete oModel.Liste_nicht_vorhandener_Dokumente;
+            delete oModel.Liste_Daten_pruefen;
+        },
+
+        /**
+         * format all dates in the modelData
+         *
+         * @param oModelData
+         * @private
+         */
+        _formatDatesInModel: function (oModelData) {
+            $.each(oModelData, function( key, value ) {
+                if (value.type === 'Date') {
+                    value.value = moment(value.value).format("YYYY-MM-DD");
+                    oModelData[key].value = value.value;
+                }
+            });
+            return oModelData;
         }
     });
 });

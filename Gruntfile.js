@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                         package: 'ZDB_ANTRD_PRF',
                         bspcontainer: 'ZDB_APRF_APP',
                         bspcontainer_text: 'SAPUI5 Application: ZDBUI5_DEMO_APP',
-                        transportno: 'BSGK900074'
+                        transportno: 'BSGK900064'
                     },
                     resources: {
                         // the source which will be transported
