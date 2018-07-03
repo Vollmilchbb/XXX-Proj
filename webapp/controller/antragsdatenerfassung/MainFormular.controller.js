@@ -41,7 +41,7 @@ sap.ui.define([
             this._initErrMsgPopover(this.getView());
 
             //call to camnunda to get data
-            this._onExternalCallMatched();
+            //this._onExternalCallMatched();
         },
 
         /* =========================================================== */
@@ -78,8 +78,6 @@ sap.ui.define([
                                     } else {
                                         sap.ui.getCore().oBusyDialogGlobal.close();
                                         oModel.setData(JSON.parse(response.text));
-                                        //date anpassen test
-                                        oModel.setData(that._formatDatesInModel(oModel.getData()));
                                         that.getView().setModel(oModel, "antragsData");
                                         core.setModel(oModel, "antragsData");
                                     }
@@ -171,6 +169,10 @@ sap.ui.define([
          * On Sachverhalt Geklaert press
          */
         onSachverhaltGeklaert: function () {
+            let oModeljson = new sap.ui.model.json.JSONModel();
+            oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData.json"), "", false);
+            oModeljson.setData(this._formatDatesInModel(oModeljson.getData()));
+
             this._completeTask();
         },
 
@@ -357,11 +359,12 @@ sap.ui.define([
             let taskId = this._getTaskId();
             let oBundle = this.getResourceBundle();
             let that = this;
-            oModel = sap.ui.getCore().getModel("antragsData").getData();
+            oModel = sap.ui.getCore().getModel("antragsData");
             oModelToSave = jQuery.extend(true, {}, oModel);
             this._deleteWrongDataFields(oModelToSave);
+            oModelToSave.setData(that._formatDatesInModel(oModel.getData()));
 
-            let opts = {'body': JSON.stringify({variables: oModelToSave})};
+            let opts = {'body': JSON.stringify({variables: oModelToSave.getData()})};
 
             sap.ui.core.BusyIndicator.show();
 
@@ -433,14 +436,14 @@ sap.ui.define([
          * @private
          */
         _deleteWrongDataFields: function (oModel) {
-            delete oModel.gepruefte_daten;
-            delete oModel.Antrag_Gesamtpruefung_Adresse;
-            delete oModel.Liste_nicht_vorhandener_Dokumente;
-            delete oModel.Liste_Daten_pruefen;
+            delete oModel.oData.gepruefte_daten;
+            delete oModel.oData.Antrag_Gesamtpruefung_Adresse;
+            delete oModel.oData.Liste_nicht_vorhandener_Dokumente;
+            delete oModel.oData.Liste_Daten_pruefen;
         },
 
         /**
-         * format all dates in the modelData
+         * format all dates in the modelData to pass java.util.Date test for Camunda
          *
          * @param oModelData
          * @private
@@ -448,7 +451,7 @@ sap.ui.define([
         _formatDatesInModel: function (oModelData) {
             $.each(oModelData, function( key, value ) {
                 if (value.type === 'Date') {
-                    value.value = moment(value.value).format("YYYY-MM-DD");
+                    value.value = moment(value.value).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                     oModelData[key].value = value.value;
                 }
             });
