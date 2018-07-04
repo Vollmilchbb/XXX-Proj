@@ -61,6 +61,7 @@ sap.ui.define([
                         let processID = taskJson.processInstanceId;
                         if (processID) {
                             let oModel = that.getView().getModel("antragsData");
+                            oModel.setProperty("/Klaerung_Antragsdatenpruefung", "");
                             let processApi = new Camunda.RestApi.ProcessInstanceApi();
                             processApi.getVariablesResource(
                                 processID,
@@ -358,6 +359,8 @@ sap.ui.define([
             let oBundle = this.getResourceBundle();
             let that = this;
             oModel = sap.ui.getCore().getModel("antragsData");
+            oModel.setProperty("/Klaerung_Antragsdatenpruefung", "true");
+
             oModelToSave = jQuery.extend(true, {}, oModel);
             this._deleteWrongDataFields(oModelToSave);
             oModelToSave.setData(that._formatDatesInModel(oModel.getData()));

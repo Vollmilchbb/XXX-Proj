@@ -24,6 +24,8 @@ sap.ui.define([
             //prozess weiter
             //task status = bearbeiten
             //task aus postkorb
+            oModel = sap.ui.getCore().getModel("antragsData");
+            oModel.setProperty("Klaerung_Antragsdatenpruefung", "false");
         },
 
         /**

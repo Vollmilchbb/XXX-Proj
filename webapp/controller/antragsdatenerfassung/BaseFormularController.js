@@ -6,11 +6,13 @@ sap.ui.define([
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/Validator",
     "sap/m/MessageStrip",
-    "de/sachsen/sab/antrdatpruf/controller/util/ErrorVariablesUtil"
+    "de/sachsen/sab/antrdatpruf/controller/util/ErrorVariablesUtil",
+    "de/sachsen/sab/antrdatpruf/model/formatter"
 
-], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip, ErrorVariablesUtil) {
+], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip, ErrorVariablesUtil, formatter) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.BaseFormularController", {
+        formatter: formatter,
 
         /* =========================================================== */
         /* lifecycle methods                                           */

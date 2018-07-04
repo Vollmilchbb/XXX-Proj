@@ -5,7 +5,7 @@
 
     <Page id="page"
           navButtonPress="onNavBackFormular" showNavButton="true"
-          title="{i18n>bonitaetsDatenTitle}" enableScrolling="true">
+          title="{i18n>kostenFinanzierungDatenPruefTitle}" enableScrolling="true">
         <content>
             <l:VerticalLayout id="oVerticalContent" width="100%"></l:VerticalLayout>
             <f:Form id="dataForm" editable="true">
