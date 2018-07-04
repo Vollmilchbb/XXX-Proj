@@ -2,13 +2,13 @@ sap.ui.define([
     "de/sachsen/sab/antrdatpruf/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil",
+    "de/sachsen/sab/antrdatpruf/controller/util/ErrorVariablesUtil",
     "de/sachsen/sab/antrdatpruf/generated/rest-api-bundle",
     "de/sachsen/sab/antrdatpruf/controller/antragsdatenerfassung/DocumentTreeItem",
     "sap/ui/core/message/Message",
     "sap/m/MessageBox",
     "de/sachsen/sab/antrdatpruf/controller/util/moment.min"
-], function (BaseController, JSONModel, MessageToast, FehlendeDocsUtil, camundajs, DocumentTreeItem, Message, MessageBox, momentjs) {
+], function (BaseController, JSONModel, MessageToast, ErrorVariablesUtil, camundajs, DocumentTreeItem, Message, MessageBox, momentjs) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.MainFormular", {
 
@@ -228,7 +228,7 @@ sap.ui.define([
         /* =========================================================== */
 
         /**
-         * Here we validate the "/Liste_nicht_vorhandener_Dokumente" property and if it contain errors we display them on the view.
+         *
          */
         _handleRouteMatched: function () {
             let aProp;
@@ -243,7 +243,7 @@ sap.ui.define([
             if (aProp) {
                 try {
                     //set icons on invalid data
-                    FehlendeDocsUtil.getInstance(view).setErrorIconsOnMainForm(aProp, view);
+                    ErrorVariablesUtil.getInstance(view).setErrorIconsOnMainForm(aProp, view);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }

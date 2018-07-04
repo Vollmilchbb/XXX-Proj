@@ -49,7 +49,7 @@ sap.ui.define([
         'Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken',
         'Dokument_Typ_Identitaetsfeststellung',
         'Dokument_Typ_Selbstauskunft',
-        'Dokument_Typ_Jahresabschluss'
+        'Dokument_Typ_Jahresabschluss',
     ];
 
     const aPlausibilitaetBonitaetsunterlagen = [
@@ -90,16 +90,18 @@ sap.ui.define([
             let sNodeText = this.getBindingContext().getObject().text;
             if (aMissingDocs.length > 0) {
                 for (let [key, value] of mDocsArrays) {
-                    if (sNodeText.localeCompare(key) === 0) {
+                    if (sNodeText.includes(key)) {
                         aMissingDocs.forEach(sMissingDoc => {
-                            if (value.includes(sMissingDoc)) {
-                                aMissingDocs.push(key);
-                            }
+                            value.forEach(function(ele) {
+                                if (ele.includes(sMissingDoc)) {
+                                    aMissingDocs.push(key);
+                                }
+                            });
                         });
                     }
                 }
                 aMissingDocs.forEach(sItem => {
-                    if (sNodeText.localeCompare(sItem) === 0) {
+                    if (sNodeText.includes(sItem)) {
                         this.$().find(".sapMLIBContent").addClass("redColor");
                         this.$().find(".sapMSTIIcon").addClass("redColor");
                     }

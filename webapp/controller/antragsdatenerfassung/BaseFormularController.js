@@ -6,9 +6,9 @@ sap.ui.define([
     "sap/m/MessageToast",
     "de/sachsen/sab/antrdatpruf/controller/util/Validator",
     "sap/m/MessageStrip",
-    "de/sachsen/sab/antrdatpruf/controller/util/FehlendeDocsUtil"
+    "de/sachsen/sab/antrdatpruf/controller/util/ErrorVariablesUtil"
 
-], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip, FehlendeDocsUtil) {
+], function (BaseController, JSONModel, camundajs, MessageBox, MessageToast, Validator, MessageStrip, ErrorVariablesUtil) {
 
     return BaseController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.BaseFormularController", {
 
@@ -249,8 +249,7 @@ sap.ui.define([
             if (aProp) {
                 //set icons on invalid data
                 try {
-                    aProp = JSON.stringify(aProp);
-                    FehlendeDocsUtil.getInstance(oView).setErrorIconsOnPage(aProp, oView);
+                    ErrorVariablesUtil.getInstance(oView).setErrorIconsOnPage(aProp, oView);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }

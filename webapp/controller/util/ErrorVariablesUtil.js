@@ -56,7 +56,7 @@ sap.ui.define([
         ['vorhabensdaten', aVorhabensdaten]
     ]);
 
-    let MainFormularService = Object.extend("de.sachsen.sab.antrdatpruf.controller.util.FehlendeDocsUtil", {
+    let MainFormularService = Object.extend("de.sachsen.sab.antrdatpruf.controller.util.ErrorVariablesUtil", {
 
         constructor : function(oView){
             this.iconAllgemeineAntragsdatenID = oView.byId('iconAllgemeineAntragsdatenID');
@@ -78,7 +78,7 @@ sap.ui.define([
          * @param oView
          */
         setErrorIconsOnPage : function(sInput, oView){
-            this._setIconsGreen(this.allIcons);
+            //this._setIconsGreen(this.allIcons);
             let aFehlerCodes = JSON.parse(sInput);
             if (Array.isArray(aFehlerCodes)) {
                 aFehlerCodes.forEach(function(item) {
