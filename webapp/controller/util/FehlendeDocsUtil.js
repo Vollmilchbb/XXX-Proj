@@ -67,7 +67,7 @@ sap.ui.define([
             this.iconBonPlausiID = oView.byId('iconBonPlausiID');
             this.iconAntraegeVorhID = oView.byId('iconAntraegeVorhID');
             this.iconRichtigkeitAntrDatenID = oView.byId('iconRichtigkeitAntrDatenID');
-            this.allIcons = [this.iconAllgemeineAntragsdatenID, this.iconKostenFinanzierungID, this.iconBonKindNachweisID, this.iconBonPlausiID, this.iconAntraegeVorhID, this.iconRichtigkeitAntrDatenID, this.iconBonUnlNichtSelbstStID];
+            this.allIcons = [this.iconAllgemeineAntragsdatenID, this.iconKostenFinanzierungID, this.iconVorhabensdatenID, this.iconBonKindNachweisID, this.iconBonPlausiID, this.iconAntraegeVorhID, this.iconRichtigkeitAntrDatenID];
         },
 
 
@@ -78,7 +78,7 @@ sap.ui.define([
          * @param oView
          */
         setErrorIconsOnPage : function(sInput, oView){
-            //this._setIconsGreen(this.allIcons);
+            this._setIconsGreen(this.allIcons);
             let aFehlerCodes = JSON.parse(sInput);
             if (Array.isArray(aFehlerCodes)) {
                 aFehlerCodes.forEach(function(item) {

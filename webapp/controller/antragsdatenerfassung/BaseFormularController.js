@@ -249,6 +249,7 @@ sap.ui.define([
             if (aProp) {
                 //set icons on invalid data
                 try {
+                    aProp = JSON.stringify(aProp);
                     FehlendeDocsUtil.getInstance(oView).setErrorIconsOnPage(aProp, oView);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
