@@ -27,7 +27,7 @@
 										src="sap-icon://message-success"
 										class="iconSizeMedium sapUiTinyMarginTop"
 										color="#2B7D2B"
-										id="iconStandardUnterlageID">
+										id="iconAllgemeineAntragsdatenID">
 										<core:layoutData>
 											<FlexItemData growFactor="0.4" />
 										</core:layoutData>
@@ -50,7 +50,7 @@
 											src="sap-icon://message-success"
 											class="iconSizeMedium sapUiTinyMarginTop"
 											color="#2B7D2B"
-											id="iconAllgBonUnterlagenID">
+											id="iconKostenFinanzierungID">
 										<core:layoutData>
 											<FlexItemData growFactor="0.4" />
 										</core:layoutData>
@@ -73,7 +73,7 @@
 											src="sap-icon://message-success"
 											class="iconSizeMedium sapUiTinyMarginTop"
 											color="#2B7D2B"
-											id="iconBonUnlNichtSelbstStID">
+											id="iconVorhabensdatenID">
 										<core:layoutData>
 											<FlexItemData growFactor="0.4" />
 										</core:layoutData>

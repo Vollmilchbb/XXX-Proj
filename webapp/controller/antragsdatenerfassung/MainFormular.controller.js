@@ -18,11 +18,9 @@ sap.ui.define([
         onInit: function () {
             //initialize route matched event
             this._oRouter = this.getRouter();
+            //sets the icons red if variables contain errors
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
-            //attach route matched for external call
-
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
-            //set busy
 
             let oBusyDialogGlobal = new sap.m.BusyDialog();
             oBusyDialogGlobal.open();
@@ -235,6 +233,7 @@ sap.ui.define([
         _handleRouteMatched: function () {
             let aProp;
             sap.ui.getCore().getMessageManager().removeAllMessages();
+            let view = this.getView();
             try {
                 let oAntragsData = sap.ui.getCore().getModel("antragsData");
                 aProp = oAntragsData.getProperty("/gepruefte_daten").value;
@@ -242,10 +241,9 @@ sap.ui.define([
                 jQuery.sap.log.info('Keine Errorcodes vorhanden,' + e);
             }
             if (aProp) {
-                //set icons on invalid data
                 try {
-                    //TODO hier sollten die fehlenden Datenpruefungen ausgewertet werden, errorcode sollte liefern
-                    //in welchen einzelnen Pruefungen ein Fehler stattfand
+                    //set icons on invalid data
+                    FehlendeDocsUtil.getInstance(view).setErrorIconsOnMainForm(aProp, view);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }
