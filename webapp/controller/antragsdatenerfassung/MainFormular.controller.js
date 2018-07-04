@@ -359,11 +359,14 @@ sap.ui.define([
             let oBundle = this.getResourceBundle();
             let that = this;
             oModel = sap.ui.getCore().getModel("antragsData");
-            oModel.setProperty("/Klaerung_Antragsdatenpruefung", "true");
 
             oModelToSave = jQuery.extend(true, {}, oModel);
-            this._deleteWrongDataFields(oModelToSave);
-            oModelToSave.setData(that._formatDatesInModel(oModel.getData()));
+            oModelToSave.setData(that._formatDatesInModel(oModelToSave.getData()));
+
+            delete oModelToSave.oData.gepruefte_daten;
+            delete oModelToSave.oData.Antrag_Gesamtpruefung_Adresse;
+            delete oModelToSave.oData.Liste_nicht_vorhandener_Dokumente;
+            delete oModelToSave.oData.Liste_Daten_pruefen;
 
             let opts = {'body': JSON.stringify({variables: oModelToSave.getData()})};
 
@@ -437,10 +440,10 @@ sap.ui.define([
          * @private
          */
         _deleteWrongDataFields: function (oModel) {
-            delete oModel.oData.gepruefte_daten;
-            delete oModel.oData.Antrag_Gesamtpruefung_Adresse;
-            delete oModel.oData.Liste_nicht_vorhandener_Dokumente;
-            delete oModel.oData.Liste_Daten_pruefen;
+            delete oModel.gepruefte_daten;
+            delete oModel.Antrag_Gesamtpruefung_Adresse;
+            delete oModel.Liste_nicht_vorhandener_Dokumente;
+            delete oModel.Liste_Daten_pruefen;
         },
 
         /**
@@ -452,7 +455,7 @@ sap.ui.define([
         _formatDatesInModel: function (oModelData) {
             $.each(oModelData, function( key, value ) {
                 if (value.type === 'Date') {
-                    value.value = moment(value.value).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                    value.value = moment(value.value).format("YYYY-MM-DDTHH:mm:ss.SSSZZ");
                     oModelData[key].value = value.value;
                 }
             });
