@@ -22,11 +22,6 @@
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
-				<Toolbar>
-					<Title text="Kontakt per E-Mail:" level="H5" titleStyle="H5"/>
-					<ToolbarSpacer />
-					<Button press="onSendGPMail" icon="sap-icon://email"/>
-				</Toolbar>
 				<Label text="GP-Nummer" />
 				<Text text="{modelGPKunde>/GeschaeftspartnerNr/value}" />
 				<Label text="Name/Vorname" />

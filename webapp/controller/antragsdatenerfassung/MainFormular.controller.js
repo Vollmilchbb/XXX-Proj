@@ -37,7 +37,6 @@ sap.ui.define([
             this._initGeschaeftsVPModel();
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
-
             //call to camnunda to get data
             //this._onExternalCallMatched();
         },
@@ -88,15 +87,6 @@ sap.ui.define([
                     jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
                 }
             }
-        },
-
-        /**
-         * send email action static showcase
-         * //TODO GP ANBINDUNG
-         *
-         */
-        onSendGPMail: function () {
-            sap.m.URLHelper.triggerEmail("gpmail@some-mail.com", "SAB-Subject", "Hallo GP, \n  wir benoetigen zusaetzlich noch die Formulare XYZ, AYZ, ZZZ und BCA. \nGruezli");
         },
 
         /**
@@ -208,7 +198,8 @@ sap.ui.define([
          * net wundern wurde so gewuenscht vom test : ))
          */
         onAbmeldenOhneSpeichern: function () {
-            this._navigateBackToInbox();
+            this._initMissingDocsButtons();
+            //this._navigateBackToInbox();
         },
 
         /**
@@ -274,8 +265,7 @@ sap.ui.define([
                     description: 'Die Dokumente sind allesamt vollst\u00e4ndig'
                 }));
             }
-        }
-        ,
+        },
 
         /**
          * Sets the custom docTreeItem to the Trees Item property.
@@ -292,7 +282,12 @@ sap.ui.define([
             let oStandardTreeItem = new DocumentTreeItem({
                 title: "{text}",
                 icon: "{ref}",
-                type: sap.m.ListType.Detail
+                type: sap.m.ListType.Inactive,
+                //wenss sap.m.ListType.Detail ist dann kann man detailpress ranhaengen
+                detailPress: function(oEvent) {
+                    //hier passiert viel magic
+                    console.log(oEvent);
+                }
             });
             oTree.bindItems("/", oStandardTreeItem);
             this._informMissingDocs(aProperties);
@@ -385,7 +380,7 @@ sap.ui.define([
                     sap.ui.core.BusyIndicator.hide();
                     setTimeout(function(){
                         that._navigateBackToInbox();
-                    },1000);
+                    }, 1000);
                 }
             });
         },
@@ -460,6 +455,7 @@ sap.ui.define([
                 }
             });
             return oModelData;
-        }
+        },
+
     });
 });
