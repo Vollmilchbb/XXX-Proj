@@ -38,7 +38,7 @@ sap.ui.define([
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
-            //this._onExternalCallMatched();
+            this._onExternalCallMatched();
         },
 
         /* =========================================================== */
@@ -158,10 +158,6 @@ sap.ui.define([
          * On Sachverhalt Geklaert press
          */
         onSachverhaltGeklaert: function () {
-            let oModeljson = new sap.ui.model.json.JSONModel();
-            oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData.json"), "", false);
-            oModeljson.setData(this._formatDatesInModel(oModeljson.getData()));
-
             this._completeTask();
         },
 
@@ -362,6 +358,32 @@ sap.ui.define([
             delete oModelToSave.oData.Antrag_Gesamtpruefung_Adresse;
             delete oModelToSave.oData.Liste_nicht_vorhandener_Dokumente;
             delete oModelToSave.oData.Liste_Daten_pruefen;
+
+            //alle dokumente sind vorhanden!
+            oModelToSave.oData.Dokument_Typ_Antrag.value=true;
+            oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value=true;
+            oModelToSave.oData.Dokument_Typ_Jahresabschluss.value=true;
+            oModelToSave.oData.Dokument_Typ_Identitaetsfeststellung.value=true;
+            oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungII.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch.value=true;
+            oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Wegerecht.value=true;
+            oModelToSave.oData.Dokument_Typ_Selbstauskunft.value=true;
+            oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate.value=true;
+            oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung.value=true;
+            oModelToSave.oData.Dokument_Typ_Kindergeldnachweis.value=true;
+            oModelToSave.oData.Dokument_Typ_Antrag.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Leitungsrecht.value=true;
+            oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungIII.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Traforecht.value=true;
+            oModelToSave.oData.Dokument_Typ_Bauplaene.value=true;
+            //oModelToSave.oData.Liste_nicht_vorhandener_Dokumente.value="";
+
+
 
             let opts = {'body': JSON.stringify({variables: oModelToSave.getData()})};
 
