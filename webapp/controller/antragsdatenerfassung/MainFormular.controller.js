@@ -38,7 +38,7 @@ sap.ui.define([
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
-            this._onExternalCallMatched();
+            //this._onExternalCallMatched();
         },
 
         /* =========================================================== */
@@ -361,6 +361,7 @@ sap.ui.define([
 
             //alle dokumente sind vorhanden!
             oModelToSave.oData.Dokument_Typ_Antrag.value=true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII_Betrag.value=true;
             oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value=true;
             oModelToSave.oData.Dokument_Typ_Jahresabschluss.value=true;
             oModelToSave.oData.Dokument_Typ_Identitaetsfeststellung.value=true;
@@ -380,8 +381,9 @@ sap.ui.define([
             oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value=true;
             oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungIII.value=true;
             oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Traforecht.value=true;
+            oModelToSave.oDataDokument_Typ_Grundbuch_Vorlastenart_AbteilungIII_1.Rangstelle.value=true;
             oModelToSave.oData.Dokument_Typ_Bauplaene.value=true;
-            //oModelToSave.oData.Liste_nicht_vorhandener_Dokumente.value="";
+            oModelToSave.oData.Liste_nicht_vorhandener_Dokumente.value="";
 
 
 
