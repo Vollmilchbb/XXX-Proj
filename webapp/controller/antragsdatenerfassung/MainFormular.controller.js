@@ -16,7 +16,6 @@ sap.ui.define([
         /* lifecycle methods                                           */
         /* =========================================================== */
         onInit: function () {
-            //initialize route matched event
             this._oRouter = this.getRouter();
             //sets the icons red if variables contain errors
             this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
@@ -39,6 +38,8 @@ sap.ui.define([
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
             //this._onExternalCallMatched();
+            this._oRouter.attachRouteMatched(this._initGPKunde(), this);
+            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._initGPKunde, this);
         },
 
         /* =========================================================== */
@@ -206,9 +207,6 @@ sap.ui.define([
             let oModel = new sap.ui.model.json.JSONModel();
             oModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/geschaeftsvorfall.json"), "", false);
             this.getView().setModel(oModel, "modelGeschVorfall");
-            let oModelGP = new sap.ui.model.json.JSONModel();
-            oModelGP.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/geschpartn.json"), "", false);
-            this.getView().setModel(oModelGP, "modelGPKunde");
         },
 
         /* =========================================================== */
@@ -280,7 +278,7 @@ sap.ui.define([
                 icon: "{ref}",
                 type: sap.m.ListType.Inactive,
                 //wenss sap.m.ListType.Detail ist dann kann man detailpress ranhaengen
-                detailPress: function(oEvent) {
+                detailPress: function (oEvent) {
                     //hier passiert viel magic
                     console.log(oEvent);
                 }
@@ -360,31 +358,34 @@ sap.ui.define([
             delete oModelToSave.oData.Liste_Daten_pruefen;
 
             //alle dokumente sind vorhanden!
-            oModelToSave.oData.Dokument_Typ_Antrag.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII_Betrag.value=true;
-            oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value=true;
-            oModelToSave.oData.Dokument_Typ_Jahresabschluss.value=true;
-            oModelToSave.oData.Dokument_Typ_Identitaetsfeststellung.value=true;
-            oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungII.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch.value=true;
-            oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Wegerecht.value=true;
-            oModelToSave.oData.Dokument_Typ_Selbstauskunft.value=true;
-            oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate.value=true;
-            oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung.value=true;
-            oModelToSave.oData.Dokument_Typ_Kindergeldnachweis.value=true;
-            oModelToSave.oData.Dokument_Typ_Antrag.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Leitungsrecht.value=true;
-            oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungIII.value=true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Traforecht.value=true;
-            oModelToSave.oDataDokument_Typ_Grundbuch_Vorlastenart_AbteilungIII_1.Rangstelle.value=true;
-            oModelToSave.oData.Dokument_Typ_Bauplaene.value=true;
-            oModelToSave.oData.Liste_nicht_vorhandener_Dokumente.value="";
+            oModelToSave.oData.Dokument_Typ_Antrag.value = true;
+            oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value = true;
+            oModelToSave.oData.Dokument_Typ_Jahresabschluss.value = true;
+            oModelToSave.oData.Dokument_Typ_Identitaetsfeststellung.value = true;
+            oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungII.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch.value = true;
+            oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Wegerecht.value = true;
+            oModelToSave.oData.Dokument_Typ_Selbstauskunft.value = true;
+            oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate.value = true;
+            oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung.value = true;
+            oModelToSave.oData.Dokument_Typ_Kindergeldnachweis.value = true;
+            oModelToSave.oData.Dokument_Typ_Antrag.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Leitungsrecht.value = true;
+            oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungIII.value = true;
+            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Traforecht.value = true;
+            oModelToSave.oData.Dokument_Typ_Bauplaene.value = true;
+            oModelToSave.setProperty("/Klaerung_Antragsdatenpruefung/value", true);
 
+
+            // var oData={
+            //     "Dokument_Typ_Antrag": { "value":true},
+            //     ...
+            // }
 
 
             let opts = {'body': JSON.stringify({variables: oModelToSave.getData()})};
@@ -402,7 +403,7 @@ sap.ui.define([
                 } else {
                     MessageToast.show(oBundle.getText("TaskComplete"));
                     sap.ui.core.BusyIndicator.hide();
-                    setTimeout(function(){
+                    setTimeout(function () {
                         that._navigateBackToInbox();
                     }, 1000);
                 }
@@ -472,7 +473,7 @@ sap.ui.define([
          * @private
          */
         _formatDatesInModel: function (oModelData) {
-            $.each(oModelData, function( key, value ) {
+            $.each(oModelData, function (key, value) {
                 if (value.type === 'Date') {
                     value.value = moment(value.value).format("YYYY-MM-DDTHH:mm:ss.SSSZZ");
                     oModelData[key].value = value.value;
@@ -481,5 +482,34 @@ sap.ui.define([
             return oModelData;
         },
 
+
+        _initGPKunde: function () {
+            let oAData = this.getView().getModel("antragsData");
+            let gpn = oAData.getData().Bestand_Kundennummer.value;
+            let oModelGP = new sap.ui.model.json.JSONModel();
+            this.getView().setModel(oModelGP, "Kunde");
+            let oCustomerModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/SAP/ZP_PT_VDARL_SRV"),
+                mProperties = {
+                    success: function (oData) {
+                        let geburtsdatum = oData.Birthdt ? moment(oData.Birthdt).format("YYYY-MM-DD") : "14.07.1967";
+                        let oKundeModel = this.getView().getModel("Kunde");
+                        oKundeModel.setProperty("/Name", oData.NameLast || "Hirschberg");
+                        oKundeModel.setProperty("/Vorname", oData.NameFirst || "Daniela");
+                        oKundeModel.setProperty("/Seit", oData.Crdat);
+                        oKundeModel.setProperty("/Geburtstag", geburtsdatum);
+                        oKundeModel.setProperty("/GPNr", oData.Partner || "GP-Nummer");
+                    }.bind(this),
+                    error: function (oData) {
+                        sap.ui.getCore().getMessageManager().addMessages(new Message({
+                            message: $(oData.response.body).find('message').first().text(),
+                            type: "Error",
+                            title: oBundle.getText("ConnectionErrorTitle"),
+                            description: oBundle.getText("ConnectionErrorTitleDescription")
+                        }));
+                    }
+                };
+
+            oCustomerModel.read("/ODV_BUT000Set(Client='400',Partner='" + gpn + "')", mProperties);
+        },
     });
 });

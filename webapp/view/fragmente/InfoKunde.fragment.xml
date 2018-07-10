@@ -23,11 +23,11 @@
 			singleContainerFullSize="false" >
 			<f:content>
 				<Label text="GP-Nummer" />
-				<Text text="{modelGPKunde>/GeschaeftspartnerNr/value}" />
+				<Text text="{Kunde>/GPNr}" />
 				<Label text="Name/Vorname" />
-				<Text text="{modelGPKunde>/NameVorname/value}" />
-				<Label text="Telefonnummer" />
-				<Text text="{modelGPKunde>/Telefonnummer/value}" />
+				<Text text="{Kunde>/Name} {Kunde>/Vorname}" />
+				<Label text="Geburtsdatum" />
+				<Text text="{Kunde>/Geburtstag}" />
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
