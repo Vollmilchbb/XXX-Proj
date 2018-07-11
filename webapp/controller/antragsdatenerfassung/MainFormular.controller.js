@@ -37,7 +37,7 @@ sap.ui.define([
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
-            //this._onExternalCallMatched();
+            this._onExternalCallMatched();
             this._oRouter.attachRouteMatched(this._initGPKunde(), this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._initGPKunde, this);
         },
@@ -226,10 +226,10 @@ sap.ui.define([
             } catch (e) {
                 jQuery.sap.log.info('Keine Errorcodes vorhanden,' + e);
             }
-            if (aProp) {
+            if (aProp && aProp.length > 0) {
                 try {
                     //set icons on invalid data
-                    ErrorVariablesUtil.getInstance(view).setErrorIconsOnMainForm(aProp, view);
+                    ErrorVariablesUtil.getInstance(view).setErrorIconsOnMainForm(aProp);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }

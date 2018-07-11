@@ -101,9 +101,8 @@ sap.ui.define([
          * icons on main form
          *
          * @param sInput
-         * @param oView
          */
-        setErrorIconsOnMainForm : function(sInput, oView) {
+        setErrorIconsOnMainForm : function(sInput) {
             let aFehlerCodes = JSON.parse(sInput);
             let that = this;
             if (Array.isArray(aFehlerCodes)) {

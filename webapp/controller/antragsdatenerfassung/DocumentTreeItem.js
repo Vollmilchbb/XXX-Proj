@@ -5,22 +5,22 @@ sap.ui.define([
     "use strict";
 
     const aStandardunterlagen = [
-        'Dokument_Typ_Antrag',
-        'Dokument_Typ_Identitaetsfeststellung',
-        'Dokument_Typ_Grundbuch',
-        'Dokument_Typ_Bauplaene',
-        'Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken',
-        'Dokument_Typ_Wohnflaechenberechnung'
+        'Antrag',
+        'Identitaetsfeststellung',
+        'Grundbuch',
+        'Bauplaene',
+        'Detaillierte_Kostenaufstellung_nach_Gewerken',
+        'Wohnflaechenberechnung'
     ];
 
     const aAllgemeineBonitaetsunterlagen = [
-        'Dokument_Typ_Selbstauskunft',
-        'Dokument_Typ_Eigenmittelnachweis',
-        'Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate',
-        'Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre',
-        'Dokument_Typ_Jahresabschluss',
-        'Dokument_Typ_Kindergeldbescheid',
-        'Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung'
+        'Selbstauskunft',
+        'Eigenmittelnachweis',
+        'Einkommensnachweise_der_letzten_3_Monate',
+        'Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre',
+        'Jahresabschluss',
+        'Kindergeldbescheid',
+        'Kopie_Kontoauszug_mit_Kindergeldzahlung'
     ];
 
     const mDocsArrays = new Map([['Standardunterlagen', aStandardunterlagen],
