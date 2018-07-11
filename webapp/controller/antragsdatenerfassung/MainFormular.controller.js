@@ -18,8 +18,6 @@ sap.ui.define([
         onInit: function () {
             this._oRouter = this.getRouter();
             //sets the icons red if variables contain errors
-            this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
-            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
 
             let oBusyDialogGlobal = new sap.m.BusyDialog();
             oBusyDialogGlobal.open();
@@ -38,8 +36,9 @@ sap.ui.define([
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
             this._onExternalCallMatched();
-            this._oRouter.attachRouteMatched(this._initGPKunde(), this);
             this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._initGPKunde, this);
+            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
+            this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
         },
 
         /* =========================================================== */
