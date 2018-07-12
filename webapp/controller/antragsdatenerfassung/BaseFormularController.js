@@ -70,12 +70,12 @@ sap.ui.define([
         onNavBackFormular: function () {
             let bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
             sap.m.MessageBox.show("Achtung: Die Daten werden nicht gespeichert \n" +
-            "Details zeigen aktuelle Antragsdaten an", {
+            "Details zeigen die Process- und Task-ID's an", {
                 icon: sap.m.MessageBox.Icon.WARNING,
                 title: "Vorsicht!",
                 actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
                 onClose: this.__fnCallbackMessageBox,
-                details: oldAntragsData.getData(),
+                details: "taskID = " + window.taskID + " " + "Process-ID = " + window.processID,
                 styleClass: bCompact ? "sapUiSizeCompact" : "",
                 contentWidth: "100px"
             });

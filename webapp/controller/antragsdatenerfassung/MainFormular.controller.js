@@ -55,9 +55,11 @@ sap.ui.define([
                     let taskApi = new Camunda.RestApi.TaskApi();
                     taskId = startupParams.taskId[0];
                     this._taskId = taskId;
+                    window.taskID = taskId;
                     taskApi.getTask(taskId, function (error, data, response) {
                         let taskJson = JSON.parse(response.text);
                         let processID = taskJson.processInstanceId;
+                        window.processID = processID;
                         if (processID) {
                             let oModel = that.getView().getModel("antragsData");
                             oModel.setProperty("/Klaerung_Antragsdatenpruefung", "");
