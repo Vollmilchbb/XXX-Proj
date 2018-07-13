@@ -7,9 +7,10 @@ sap.ui.define([
     const aStandardunterlagen = [
         'Antrag',
         'Identitaetsfeststellung',
+        'Identitätsfeststellung',
         'Grundbuch',
         'Bauplaene',
-        'Detaillierte_Kostenaufstellung_nach_Gewerken',
+        'detaillierte_Kostenaufstellung_nach_Gewerken',
         'Wohnflaechenberechnung'
     ];
 
@@ -20,7 +21,8 @@ sap.ui.define([
         'Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre',
         'Jahresabschluss',
         'Kindergeldbescheid',
-        'Kopie_Kontoauszug_mit_Kindergeldzahlung'
+        'Kopie_Kontoauszug_mit_Kindergeldzahlung',
+        'Nachweis_ueber_Kindergeld'
     ];
 
     const mDocsArrays = new Map([['Standardunterlagen', aStandardunterlagen],
@@ -41,31 +43,39 @@ sap.ui.define([
             //Adds the parent node to the list of nodes to be set to ERROR state, if a node contained in a parent node has errors.
             //If some of the docs which are missing are contained in the parent node, then set the parent node
             //state to ERROR too
-            let sNodeText = this.getBindingContext().getObject().text;
+            let aNodeText = [];
+            aNodeText.push(this.getBindingContext().getObject().text);
+            aNodeText.push("Dokument_Typ_" + this.getBindingContext().getObject().text);
             if (aMissingDocs.length > 0) {
                 for (let [key, value] of mDocsArrays) {
-                    if (sNodeText.includes(key)) {
-                        aMissingDocs.forEach(sMissingDoc => {
-                            value.forEach(function(ele) {
-                                if (ele.includes(sMissingDoc)) {
-                                    aMissingDocs.push(key);
-                                }
+                    aNodeText.forEach(e => {
+                        if (e.includes(key)) {
+                            aMissingDocs.forEach(sMissingDoc => {
+                                value.forEach( ele => {
+                                    if (ele.includes(sMissingDoc)) {
+                                        aMissingDocs.push(key);
+                                    }
+                                });
                             });
-                        });
-                    }
+                        }
+                    })
                 }
                 aMissingDocs.forEach(sItem => {
-                    if (sNodeText.includes(sItem)) {
-                        this.$().find(".sapMLIBContent").addClass("redColor");
-                        this.$().find(".sapMSTIIcon").addClass("redColor");
-                    }
+                    aNodeText.forEach( e => {
+                        if (e.includes(sItem)) {
+                            this.$().find(".sapMLIBContent").addClass("redColor");
+                            this.$().find(".sapMSTIIcon").addClass("redColor");
+                        }
+                    })
                 });
             } else {
                 //No documents missing, so set the icons to green
                 for (let [key, value] of mDocsArrays) {
-                    if (sNodeText.localeCompare(key) === 0) {
-                        this.$().find(".sapMSTIIcon").addClass("greenColor");
-                    }
+                    aNodeText.forEach(e => {
+                        if (e.localeCompare(key) === 0) {
+                            this.$().find(".sapMSTIIcon").addClass("greenColor");
+                        }
+                    })
                 }
                 jQuery.sap.log.info('Keine fehlende Dokumente erkannt!');
             }

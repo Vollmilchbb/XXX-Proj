@@ -19,6 +19,8 @@ sap.ui.define([
             this._oRouter = this.getRouter();
             //sets the icons red if variables contain errors
 
+            window.gMissingDoc = null;
+
             let oBusyDialogGlobal = new sap.m.BusyDialog();
             oBusyDialogGlobal.open();
             sap.ui.getCore().oBusyDialogGlobal = oBusyDialogGlobal;
@@ -489,16 +491,21 @@ sap.ui.define([
             let gpn = oAData.getData().Bestand_Kundennummer.value;
             let oModelGP = new sap.ui.model.json.JSONModel();
             this.getView().setModel(oModelGP, "Kunde");
-            let oCustomerModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/SAP/ZP_PT_VDARL_SRV"),
+            let oCustomerModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZVH_PDB_DAP_GPINFO_SRV"),
                 mProperties = {
                     success: function (oData) {
-                        let geburtsdatum = oData.Birthdt ? moment(oData.Birthdt).format("YYYY-MM-DD") : "14.07.1967";
+                        //let geburtsdatum = oData.Birthdt ? moment(oData.Birthdt).format("YYYY-MM-DD") : "14.07.1967";
                         let oKundeModel = this.getView().getModel("Kunde");
-                        oKundeModel.setProperty("/Name", oData.NameLast || "Hirschberg");
-                        oKundeModel.setProperty("/Vorname", oData.NameFirst || "Daniela");
-                        oKundeModel.setProperty("/Seit", oData.Crdat);
-                        oKundeModel.setProperty("/Geburtstag", geburtsdatum);
-                        oKundeModel.setProperty("/GPNr", oData.Partner || "GP-Nummer");
+                        oKundeModel.setProperty("/Name", oData.Name);
+                        oKundeModel.setProperty("/Vorname", oData.Vorname);
+                        oKundeModel.setProperty("/Addproducts", oData.Addproducts);
+                        oKundeModel.setProperty("/Email", oData.Email);
+                        oKundeModel.setProperty("/Strasse", oData.Strasse);
+                        oKundeModel.setProperty("/Telefon", oData.Telefon);
+                        oKundeModel.setProperty("/Partner", oData.Partner);
+                        oKundeModel.setProperty("/Plz", oData.Plz);
+                        oKundeModel.setProperty("/Ort", oData.Ort);
+                        oKundeModel.setProperty("/Hausnummer", oData.Hausnummer);
                     }.bind(this),
                     error: function (oData) {
                         sap.ui.getCore().getMessageManager().addMessages(new Message({
@@ -509,8 +516,7 @@ sap.ui.define([
                         }));
                     }
                 };
-
-            oCustomerModel.read("/ODV_BUT000Set(Client='400',Partner='" + gpn + "')", mProperties);
+            oCustomerModel.read("/GPInfoDataSet(Partner='" + gpn + "')", mProperties);
         },
     });
 });

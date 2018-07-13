@@ -9,7 +9,7 @@
         "ref": "sap-icon://document-text"
       },
       {
-        "text": "Identitaetsfeststellung",
+        "text": "Identitätsfeststellung",
         "ref": "sap-icon://document-text"
       },
       {
@@ -21,7 +21,7 @@
         "ref": "sap-icon://document-text"
       },
       {
-        "text": "Detaillierte_Kostenaufstellung_nach_Gewerken",
+        "text": "detaillierte_Kostenaufstellung_nach_Gewerken",
         "ref": "sap-icon://document-text"
       },
       {
@@ -60,7 +60,7 @@
         "ref": "sap-icon://document-text"
       },
       {
-        "text": "Kopie_Kontoauszug_mit_Kindergeldzahlung",
+        "text": "Kindergeldnachweis",
         "ref": "sap-icon://document-text"
       }
     ]
