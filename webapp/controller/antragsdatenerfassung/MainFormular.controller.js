@@ -16,9 +16,6 @@ sap.ui.define([
         /* lifecycle methods                                           */
         /* =========================================================== */
         onInit: function () {
-            this._oRouter = this.getRouter();
-            //sets the icons red if variables contain errors
-
             window.gMissingDoc = null;
 
             let oBusyDialogGlobal = new sap.m.BusyDialog();
@@ -27,31 +24,36 @@ sap.ui.define([
 
             //debug zeug
             let oModeljson = new sap.ui.model.json.JSONModel();
-            oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData2.json"), "", false);
+            //oModeljson.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/antragsData2.json"), "", false);
             this.getView().setModel(oModeljson, "antragsData");
             sap.ui.getCore().setModel(oModeljson, "antragsData");
 
             //COMMENT THIS
-            sap.ui.getCore().oBusyDialogGlobal.close();
+            sap.ui.getCore().getMessageManager().removeAllMessages();
             this._initGeschaeftsVPModel();
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
-            this._onExternalCallMatched();
-            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._initGPKunde, this);
-            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._handleTreeMissingDocs, this);
-            this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
+            this.getRouter().getRoute("antragsDatenErfassung").attachPatternMatched(this._onExternalCallMatched, this);
         },
+
+        initStuff: function() {
+            this._initGPKunde();
+            this._handleTreeMissingDocs();
+            this._handleRouteMatched();
+        },
+
 
         /* =========================================================== */
         /* event handlers                                              */
         /* =========================================================== */
 
         _onExternalCallMatched: function () {
-            let that = this,
+            var that = this,
                 core = sap.ui.getCore();
             let taskId;
             if (!this._taskId) {
+                //taskId = "cff9687d-833e-11e8-938d-005056ac4b24";
                 let startupParams = this.getOwnerComponent().getComponentData().startupParameters; // get Startup params from Owner Component
                 if ((startupParams.taskId && startupParams.taskId[0])) {
                     let taskApi = new Camunda.RestApi.TaskApi();
@@ -64,7 +66,7 @@ sap.ui.define([
                         window.processID = processID;
                         if (processID) {
                             let oModel = that.getView().getModel("antragsData");
-                            oModel.setProperty("/Klaerung_Antragsdatenpruefung", "");
+                            oModel.setProperty("/Klaerung_Antragsdatenpruefung/value", "");
                             let processApi = new Camunda.RestApi.ProcessInstanceApi();
                             processApi.getVariablesResource(
                                 processID,
@@ -78,18 +80,19 @@ sap.ui.define([
                                             description: 'Eventuell besteht ein Verbindungsproblem mit Camunda'
                                         }));
                                     } else {
-                                        sap.ui.getCore().oBusyDialogGlobal.close();
                                         oModel.setData(JSON.parse(response.text));
                                         that.getView().setModel(oModel, "antragsData");
                                         core.setModel(oModel, "antragsData");
+                                        that.initStuff();
+                                        sap.ui.getCore().oBusyDialogGlobal.close();
                                     }
                                 }
                             );
                         }
                     });
-                } else {
-                    jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
-                }
+                 } else {
+                     jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
+                 }
             }
         },
 
@@ -97,6 +100,7 @@ sap.ui.define([
          * On Standardpruefung btn Anzeigen click
          */
         onPrufStandardUnterlagen: function () {
+            sap.ui.getCore().getMessageManager().removeAllMessages();
             this.getRouter().navTo("standardunterlagen");
         },
 
@@ -198,8 +202,7 @@ sap.ui.define([
          * net wundern wurde so gewuenscht vom test : ))
          */
         onAbmeldenOhneSpeichern: function () {
-            this._initMissingDocsButtons();
-            //this._navigateBackToInbox();
+            this._navigateBackToInbox();
         },
 
         /**
@@ -221,7 +224,6 @@ sap.ui.define([
          */
         _handleRouteMatched: function () {
             let aProp;
-            sap.ui.getCore().getMessageManager().removeAllMessages();
             let view = this.getView();
             try {
                 let oAntragsData = sap.ui.getCore().getModel("antragsData");
@@ -296,7 +298,6 @@ sap.ui.define([
          */
         _initTreeMissingDocsModel: function () {
             let treeModel = new sap.ui.model.json.JSONModel();
-            //treeModel.loadData("/webapp/json/docTree.json", "", false);
             treeModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/docTree.json"), "", false);
             this.getView().byId("treeDocsId").setModel(treeModel);
         },
