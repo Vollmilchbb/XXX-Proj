@@ -235,7 +235,7 @@ sap.ui.define([
             if (aProp && aProp.length > 0) {
                 try {
                     //set icons on invalid data
-                    ErrorVariablesUtil.getInstance(view).setErrorIconsOnMainForm(aProp);
+                    ErrorVariablesUtil.getInstance(view).setErrorIconsOnMainForm(aProp, view);
                 } catch (ex) {
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }

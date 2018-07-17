@@ -59,15 +59,15 @@ sap.ui.define([
     let MainFormularService = Object.extend("de.sachsen.sab.antrdatpruf.controller.util.ErrorVariablesUtil", {
 
         constructor : function(oView){
-            this.iconAllgemeineAntragsdatenID = oView.byId('iconAllgemeineAntragsdatenID');
-            this.iconKostenFinanzierungID = oView.byId('iconKostenFinanzierungID');
-            this.iconVorhabensdatenID = oView.byId('iconVorhabensdatenID');
-            //noch net da
-            this.iconBonKindNachweisID = oView.byId('iconBonKindNachweisID');
-            this.iconBonPlausiID = oView.byId('iconBonPlausiID');
-            this.iconAntraegeVorhID = oView.byId('iconAntraegeVorhID');
-            this.iconRichtigkeitAntrDatenID = oView.byId('iconRichtigkeitAntrDatenID');
-            this.allIcons = [this.iconAllgemeineAntragsdatenID, this.iconKostenFinanzierungID, this.iconVorhabensdatenID, this.iconBonKindNachweisID, this.iconBonPlausiID, this.iconAntraegeVorhID, this.iconRichtigkeitAntrDatenID];
+            // this.iconAllgemeineAntragsdatenID = oView.byId('iconAllgemeineAntragsdatenID');
+            // this.iconKostenFinanzierungID = oView.byId('iconKostenFinanzierungID');
+            // this.iconVorhabensdatenID = oView.byId('iconVorhabensdatenID');
+            // //noch net da
+            // this.iconBonKindNachweisID = oView.byId('iconBonKindNachweisID');
+            // this.iconBonPlausiID = oView.byId('iconBonPlausiID');
+            // this.iconAntraegeVorhID = oView.byId('iconAntraegeVorhID');
+            // this.iconRichtigkeitAntrDatenID = oView.byId('iconRichtigkeitAntrDatenID');
+            // this.allIcons = [this.iconAllgemeineAntragsdatenID, this.iconKostenFinanzierungID, this.iconVorhabensdatenID, this.iconBonKindNachweisID, this.iconBonPlausiID, this.iconAntraegeVorhID, this.iconRichtigkeitAntrDatenID];
         },
 
 
@@ -102,7 +102,15 @@ sap.ui.define([
          *
          * @param sInput
          */
-        setErrorIconsOnMainForm : function(sInput) {
+        setErrorIconsOnMainForm : function(sInput, oView) {
+            this.iconAllgemeineAntragsdatenID = oView.byId('iconAllgemeineAntragsdatenID');
+            this.iconKostenFinanzierungID = oView.byId('iconKostenFinanzierungID');
+            this.iconVorhabensdatenID = oView.byId('iconVorhabensdatenID');
+            this.iconBonKindNachweisID = oView.byId('iconBonKindNachweisID');
+            this.iconBonPlausiID = oView.byId('iconBonPlausiID');
+            this.iconAntraegeVorhID = oView.byId('iconAntraegeVorhID');
+            this.iconRichtigkeitAntrDatenID = oView.byId('iconRichtigkeitAntrDatenID');
+
             let aFehlerCodes = JSON.parse(sInput);
             let that = this;
             if (Array.isArray(aFehlerCodes)) {

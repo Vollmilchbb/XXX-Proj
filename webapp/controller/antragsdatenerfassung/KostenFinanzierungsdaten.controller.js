@@ -6,6 +6,7 @@ sap.ui.define([
         return BaseFormularController.extend("de.sachsen.sab.antrdatpruf.controller.antragsdatenerfassung.KostenFinanzierungsdaten", {
             onInit: function() {
                 this.getRouter().attachRouteMatched(this.handleRouteMatched, this);
+                this.getRouter().attachRouteMatched(this._setErrorInputs, this);
                 this.initErrMsgPopover(this.getView());
                 this._setErrorInputs(this.getView());
             }
