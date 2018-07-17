@@ -183,6 +183,7 @@
 														maxLength : 30
 													}
 												}"
+                                       change="onInputDateChange"
                                 />
                             </f:fields>
                         </f:FormElement>

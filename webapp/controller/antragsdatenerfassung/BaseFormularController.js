@@ -256,6 +256,35 @@ sap.ui.define([
                     jQuery.sap.log.info('An error occures while trying to set errror icons' + ex);
                 }
             }
+        },
+
+        onInputDateChange: function (oEvent) {
+            let oInput = oEvent.getSource(),
+                sValue = oInput.getValue(),
+                oValueBindingInfo = oInput.getBindingInfo("value"),
+                sBindingPath = oValueBindingInfo.binding.sPath;
+
+            if (sValue.length !== 10) {
+                oInput.setValueState("Error");
+                oInput.setValueStateText("Das Datum muss das Format dd.mm.yyyy haben")
+            } else {
+                try {
+                    oDate = moment(this.parseDate(sValue)).format("YYYY-MM-DDTHH:mm:ss.SSSZZ");
+                    sap.ui.getCore().getModel("antragsData").setProperty(sBindingPath, oDate);
+                } catch (oError) {
+                    oInput.setValueState("Error");
+                    oInput.setValueStateText("Das Datum muss das Format dd.mm.yyyy haben")
+                }
+            }
+        },
+
+        parseDate: function (input) {
+            let parts = input.match(/(\d+)/g), i = 0, fmt = {},
+                format = 'dd-mm-yyyy';
+            format.replace(/(dd|mm|yyyy)/g, part => {
+                fmt[part] = i++;
+            });
+            return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']]);
         }
 
     });

@@ -92,7 +92,8 @@ sap.ui.define([
                     });
                  } else {
                      jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
-                 }
+                }
+
             }
         },
 
