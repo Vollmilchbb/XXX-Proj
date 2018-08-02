@@ -173,7 +173,8 @@ sap.ui.define([
         onZwischenSpeichern: function () {
             let taskApi = new Camunda.RestApi.TaskApi(),
                 taskId = this._getTaskId(),
-                oBundle = this.getResourceBundle();
+                oBundle = this.getResourceBundle(),
+                that = this;
 
             oModel = sap.ui.getCore().getModel("antragsData").getData();
             let oModelToSave = jQuery.extend(true, {}, oModel);
@@ -194,9 +195,11 @@ sap.ui.define([
                     } else {
                         MessageToast.show(oBundle.getText("SaveSuccess"));
                         sap.ui.core.BusyIndicator.hide();
+                        setTimeout(() => { that._navigateBackToInbox(); }, 2000);
                     }
                 });
             }
+
         },
 
         /*
@@ -363,35 +366,49 @@ sap.ui.define([
             delete oModelToSave.oData.Liste_Daten_pruefen;
 
             //alle dokumente sind vorhanden!
-            oModelToSave.oData.Dokument_Typ_Antrag.value = true;
-            oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value = true;
-            oModelToSave.oData.Dokument_Typ_Jahresabschluss.value = true;
-            oModelToSave.oData.Dokument_Typ_Identitaetsfeststellung.value = true;
-            oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungII.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch.value = true;
-            oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlasten_AbteilungIII.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Wegerecht.value = true;
-            oModelToSave.oData.Dokument_Typ_Selbstauskunft.value = true;
-            oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate.value = true;
-            oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung.value = true;
-            oModelToSave.oData.Dokument_Typ_Kindergeldnachweis.value = true;
-            oModelToSave.oData.Dokument_Typ_Antrag.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Leitungsrecht.value = true;
-            oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungIII.value = true;
-            oModelToSave.oData.Dokument_Typ_Grundbuch_Vorlastenart_AbteilungII_Traforecht.value = true;
-            oModelToSave.oData.Dokument_Typ_Bauplaene.value = true;
+            if (oModelToSave.oData.Dokument_Typ_Antrag) {
+                oModelToSave.oData.Dokument_Typ_Antrag.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung) {
+                oModelToSave.oData.Dokument_Typ_Kopie_Kontoauszug_mit_Kindergeldzahlung.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Jahresabschluss) {
+                oModelToSave.oData.Dokument_Typ_Jahresabschluss.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis) {
+                oModelToSave.oData.Dokument_Typ_Eigenmittelnachweis.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Grundbuch) {
+                oModelToSave.oData.Dokument_Typ_Grundbuch.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken) {
+                oModelToSave.oData.Dokument_Typ_detaillierte_Kostenaufstellung_nach_Gewerken.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Selbstauskunft) {
+                oModelToSave.oData.Dokument_Typ_Selbstauskunft.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate) {
+                oModelToSave.oData.Dokument_Typ_Einkommensnachweise_der_letzten_3_Monate.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung) {
+                oModelToSave.oData.Dokument_Typ_Wohnflaechenberechnung.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Kindergeldnachweis) {
+                oModelToSave.oData.Dokument_Typ_Kindergeldnachweis.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Antrag) {
+                oModelToSave.oData.Dokument_Typ_Antrag.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre) {
+                oModelToSave.oData.Dokument_Typ_Einnahmen_und_Ueberschussrechnung_der_letzten_3_Jahre.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Bauplaene) {
+                oModelToSave.oData.Dokument_Typ_Bauplaene.value = true;
+            }
+            if (oModelToSave.oData.Dokument_Typ_Identit\u00e4tsfeststellung ) {
+                oModelToSave.oData.Dokument_Typ_Identit\u00e4tsfeststellung.value = true;
+            }
             oModelToSave.setProperty("/Klaerung_Antragsdatenpruefung/value", true);
-
-
-            // var oData={
-            //     "Dokument_Typ_Antrag": { "value":true},
-            //     ...
-            // }
-
 
             let opts = {'body': JSON.stringify({variables: oModelToSave.getData()})};
 
