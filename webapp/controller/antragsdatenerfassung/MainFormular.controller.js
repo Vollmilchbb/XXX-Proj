@@ -30,7 +30,7 @@ sap.ui.define([
 
             //COMMENT THIS
             sap.ui.getCore().getMessageManager().removeAllMessages();
-            this._initGeschaeftsVPModel();
+
             this._initTreeMissingDocsModel();
             this._initErrMsgPopover(this.getView());
             //call to camnunda to get data
@@ -39,6 +39,7 @@ sap.ui.define([
 
         initStuff: function() {
             this._initGPKunde();
+            this._initGeschaeftsVPModel();
             this._handleTreeMissingDocs();
             this._handleRouteMatched();
         },
@@ -90,10 +91,9 @@ sap.ui.define([
                             );
                         }
                     });
-                 } else {
-                     jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
+                } else {
+                    jQuery.sap.log.info('Keine Startparameter erhalten!,' + e);
                 }
-
             }
         },
 
@@ -216,6 +216,9 @@ sap.ui.define([
         _initGeschaeftsVPModel: function () {
             let oModel = new sap.ui.model.json.JSONModel();
             oModel.loadData(jQuery.sap.getModulePath("de.sachsen.sab.antrdatpruf", "/json/geschaeftsvorfall.json"), "", false);
+            let oAData = this.getView().getModel("antragsData");
+            let sAntragsNummer = oAData.getData().Antrag_Antragsnummer.value;
+            oModel.setProperty("/Antrag_Antragsnummer", sAntragsNummer);
             this.getView().setModel(oModel, "modelGeschVorfall");
         },
 
@@ -503,7 +506,6 @@ sap.ui.define([
             });
             return oModelData;
         },
-
 
         _initGPKunde: function () {
             let oAData = this.getView().getModel("antragsData");
