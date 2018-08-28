@@ -367,6 +367,7 @@ sap.ui.define([
             delete oModelToSave.oData.Antrag_Gesamtpruefung_Adresse;
             delete oModelToSave.oData.Liste_nicht_vorhandener_Dokumente;
             delete oModelToSave.oData.Liste_Daten_pruefen;
+            delete oModelToSave.oData.READ_FILES;
 
             //alle dokumente sind vorhanden!
             if (oModelToSave.oData.Dokument_Typ_Antrag) {
